@@ -1,0 +1,10 @@
+### Register User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "name": "Mamat",
+  "email": "Mamat@gmail.com",
+  "password": "password123",
+  "confirm": "password123"
+}
