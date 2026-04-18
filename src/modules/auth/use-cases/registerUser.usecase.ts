@@ -1,13 +1,13 @@
-import { IAuthRepository } from "../domain/IAuthRepository";
+import { IAuthRepository } from "../domain/interfaces/IAuthRepository";
 import { User } from "../../user/domain/user";
 import { randomUUID } from "node:crypto";
-import { IUserRepository } from "../../user/domain/IUserRepository";
-import { bcryptHelper } from "../infrastructure/bcryptHelper";
+import { bcryptHelper } from "../infrastructure/utils/bcryptHelper";
+import { UserAPI } from "../../user/public/UserAPI";
 
 export class RegisterUser {
   constructor(
     private authRepository: IAuthRepository,
-    private userRepository: IUserRepository,
+    private userAPI: UserAPI,
   ) {}
 
   async registerUser({
@@ -24,7 +24,7 @@ export class RegisterUser {
     if (password !== confirm) {
     }
 
-    const existingUser = await this.userRepository.getUserByEmail(email);
+    const existingUser = await this.userAPI.getUserByEmail(email);
 
     if (!existingUser) {
     }

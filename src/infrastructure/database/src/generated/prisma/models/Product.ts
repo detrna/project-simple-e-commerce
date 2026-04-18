@@ -20,24 +20,13 @@ export type ProductModel = runtime.Types.Result.DefaultSelection<Prisma.$Product
 
 export type AggregateProduct = {
   _count: ProductCountAggregateOutputType | null
-  _avg: ProductAvgAggregateOutputType | null
-  _sum: ProductSumAggregateOutputType | null
   _min: ProductMinAggregateOutputType | null
   _max: ProductMaxAggregateOutputType | null
-}
-
-export type ProductAvgAggregateOutputType = {
-  price: number | null
-}
-
-export type ProductSumAggregateOutputType = {
-  price: number | null
 }
 
 export type ProductMinAggregateOutputType = {
   id: string | null
   name: string | null
-  price: number | null
   category: $Enums.Category | null
   subCategory: $Enums.Sub_Category | null
   createdAt: Date | null
@@ -46,7 +35,6 @@ export type ProductMinAggregateOutputType = {
 export type ProductMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  price: number | null
   category: $Enums.Category | null
   subCategory: $Enums.Sub_Category | null
   createdAt: Date | null
@@ -55,7 +43,6 @@ export type ProductMaxAggregateOutputType = {
 export type ProductCountAggregateOutputType = {
   id: number
   name: number
-  price: number
   category: number
   subCategory: number
   createdAt: number
@@ -63,18 +50,9 @@ export type ProductCountAggregateOutputType = {
 }
 
 
-export type ProductAvgAggregateInputType = {
-  price?: true
-}
-
-export type ProductSumAggregateInputType = {
-  price?: true
-}
-
 export type ProductMinAggregateInputType = {
   id?: true
   name?: true
-  price?: true
   category?: true
   subCategory?: true
   createdAt?: true
@@ -83,7 +61,6 @@ export type ProductMinAggregateInputType = {
 export type ProductMaxAggregateInputType = {
   id?: true
   name?: true
-  price?: true
   category?: true
   subCategory?: true
   createdAt?: true
@@ -92,7 +69,6 @@ export type ProductMaxAggregateInputType = {
 export type ProductCountAggregateInputType = {
   id?: true
   name?: true
-  price?: true
   category?: true
   subCategory?: true
   createdAt?: true
@@ -137,18 +113,6 @@ export type ProductAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ProductAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ProductSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ProductMinAggregateInputType
@@ -179,8 +143,6 @@ export type ProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: ProductCountAggregateInputType | true
-  _avg?: ProductAvgAggregateInputType
-  _sum?: ProductSumAggregateInputType
   _min?: ProductMinAggregateInputType
   _max?: ProductMaxAggregateInputType
 }
@@ -188,13 +150,10 @@ export type ProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type ProductGroupByOutputType = {
   id: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt: Date
   _count: ProductCountAggregateOutputType | null
-  _avg: ProductAvgAggregateOutputType | null
-  _sum: ProductSumAggregateOutputType | null
   _min: ProductMinAggregateOutputType | null
   _max: ProductMaxAggregateOutputType | null
 }
@@ -220,7 +179,6 @@ export type ProductWhereInput = {
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   id?: Prisma.StringFilter<"Product"> | string
   name?: Prisma.StringFilter<"Product"> | string
-  price?: Prisma.FloatFilter<"Product"> | number
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFilter<"Product"> | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -230,7 +188,6 @@ export type ProductWhereInput = {
 export type ProductOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrder
   category?: Prisma.SortOrder
   subCategory?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -243,7 +200,6 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   name?: Prisma.StringFilter<"Product"> | string
-  price?: Prisma.FloatFilter<"Product"> | number
   category?: Prisma.EnumCategoryFilter<"Product"> | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFilter<"Product"> | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -253,15 +209,12 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
 export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrder
   category?: Prisma.SortOrder
   subCategory?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
-  _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
   _min?: Prisma.ProductMinOrderByAggregateInput
-  _sum?: Prisma.ProductSumOrderByAggregateInput
 }
 
 export type ProductScalarWhereWithAggregatesInput = {
@@ -270,7 +223,6 @@ export type ProductScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProductScalarWhereWithAggregatesInput | Prisma.ProductScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Product"> | string
   name?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  price?: Prisma.FloatWithAggregatesFilter<"Product"> | number
   category?: Prisma.EnumCategoryWithAggregatesFilter<"Product"> | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryWithAggregatesFilter<"Product"> | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -279,7 +231,6 @@ export type ProductScalarWhereWithAggregatesInput = {
 export type ProductCreateInput = {
   id?: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt?: Date | string
@@ -289,7 +240,6 @@ export type ProductCreateInput = {
 export type ProductUncheckedCreateInput = {
   id?: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt?: Date | string
@@ -299,7 +249,6 @@ export type ProductUncheckedCreateInput = {
 export type ProductUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -309,7 +258,6 @@ export type ProductUpdateInput = {
 export type ProductUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -319,7 +267,6 @@ export type ProductUncheckedUpdateInput = {
 export type ProductCreateManyInput = {
   id?: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt?: Date | string
@@ -328,7 +275,6 @@ export type ProductCreateManyInput = {
 export type ProductUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -337,7 +283,6 @@ export type ProductUpdateManyMutationInput = {
 export type ProductUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -346,20 +291,14 @@ export type ProductUncheckedUpdateManyInput = {
 export type ProductCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrder
   category?: Prisma.SortOrder
   subCategory?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
-export type ProductAvgOrderByAggregateInput = {
-  price?: Prisma.SortOrder
-}
-
 export type ProductMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrder
   category?: Prisma.SortOrder
   subCategory?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -368,27 +307,14 @@ export type ProductMaxOrderByAggregateInput = {
 export type ProductMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrder
   category?: Prisma.SortOrder
   subCategory?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
-export type ProductSumOrderByAggregateInput = {
-  price?: Prisma.SortOrder
-}
-
 export type ProductScalarRelationFilter = {
   is?: Prisma.ProductWhereInput
   isNot?: Prisma.ProductWhereInput
-}
-
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type EnumCategoryFieldUpdateOperationsInput = {
@@ -416,7 +342,6 @@ export type ProductUpdateOneRequiredWithoutVariantsNestedInput = {
 export type ProductCreateWithoutVariantsInput = {
   id?: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt?: Date | string
@@ -425,7 +350,6 @@ export type ProductCreateWithoutVariantsInput = {
 export type ProductUncheckedCreateWithoutVariantsInput = {
   id?: string
   name: string
-  price: number
   category: $Enums.Category
   subCategory: $Enums.Sub_Category
   createdAt?: Date | string
@@ -450,7 +374,6 @@ export type ProductUpdateToOneWithWhereWithoutVariantsInput = {
 export type ProductUpdateWithoutVariantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -459,7 +382,6 @@ export type ProductUpdateWithoutVariantsInput = {
 export type ProductUncheckedUpdateWithoutVariantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.FloatFieldUpdateOperationsInput | number
   category?: Prisma.EnumCategoryFieldUpdateOperationsInput | $Enums.Category
   subCategory?: Prisma.EnumSub_CategoryFieldUpdateOperationsInput | $Enums.Sub_Category
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -499,7 +421,6 @@ export type ProductCountOutputTypeCountVariantsArgs<ExtArgs extends runtime.Type
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  price?: boolean
   category?: boolean
   subCategory?: boolean
   createdAt?: boolean
@@ -510,7 +431,6 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  price?: boolean
   category?: boolean
   subCategory?: boolean
   createdAt?: boolean
@@ -519,7 +439,6 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  price?: boolean
   category?: boolean
   subCategory?: boolean
   createdAt?: boolean
@@ -528,13 +447,12 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ProductSelectScalar = {
   id?: boolean
   name?: boolean
-  price?: boolean
   category?: boolean
   subCategory?: boolean
   createdAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "price" | "category" | "subCategory" | "createdAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "subCategory" | "createdAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   variants?: boolean | Prisma.Product$variantsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
@@ -550,7 +468,6 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    price: number
     category: $Enums.Category
     subCategory: $Enums.Sub_Category
     createdAt: Date
@@ -980,7 +897,6 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
 export interface ProductFieldRefs {
   readonly id: Prisma.FieldRef<"Product", 'String'>
   readonly name: Prisma.FieldRef<"Product", 'String'>
-  readonly price: Prisma.FieldRef<"Product", 'Float'>
   readonly category: Prisma.FieldRef<"Product", 'Category'>
   readonly subCategory: Prisma.FieldRef<"Product", 'Sub_Category'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>

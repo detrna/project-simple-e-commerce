@@ -15,8 +15,9 @@ model User {
 
   store Store[]
   jwt jwt[]
-  cart Cart_Variant_User[]
+  cart Cart[]
   order Order[]
+
 
   createdAt DateTime @default(now())
 }
@@ -31,7 +32,8 @@ model jwt {
 
 model Store {
   id String @id @default(uuid())
-  location String
+  address String
+  email String
 
   userId String
   owner User @relation(fields: [userId], references: [id])
@@ -42,7 +44,6 @@ model Store {
 model Product {
   id String @id @default(uuid())
   name String
-  price Float
 
   category Category
   subCategory Sub_Category
@@ -73,35 +74,38 @@ enum Sub_Category {
 model Variant {
   id String @id @default(uuid())
   name String
+  price Float
+  stock Int
 
   productId String
   product Product @relation(fields: [productId], references: [id])
 
-  cart Cart_Variant_User[]
+  cart Cart_Variant[]
   order Order[]
 }
 
 model Cart {
   id String @id @default(uuid())
 
-  junction Cart_Variant_User[]
+  Cart_Variant Cart_Variant[]
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
 }
 
-model Cart_Variant_User {
+model Cart_Variant {
   id String @id @default(uuid())
-  userId String
   variantId String
   cartId String
-
-  user User @relation(fields: [userId], references: [id])
+  quantity Int
 
   variant Variant @relation(fields: [variantId], references: [id])
-
   cart Cart @relation(fields: [cartId], references: [id])
 }
 
 model Order {
   id String @id @default(uuid())
+  quantity Int
   payment Boolean
   shipment String
   fee Float

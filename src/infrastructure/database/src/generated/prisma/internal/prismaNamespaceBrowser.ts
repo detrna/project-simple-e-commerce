@@ -57,7 +57,7 @@ export const ModelName = {
   Product: 'Product',
   Variant: 'Variant',
   Cart: 'Cart',
-  Cart_Variant_User: 'Cart_Variant_User',
+  Cart_Variant: 'Cart_Variant',
   Order: 'Order',
   Transaction: 'Transaction',
   Review: 'Review'
@@ -101,7 +101,8 @@ export type JwtScalarFieldEnum = (typeof JwtScalarFieldEnum)[keyof typeof JwtSca
 
 export const StoreScalarFieldEnum = {
   id: 'id',
-  location: 'location',
+  address: 'address',
+  email: 'email',
   userId: 'userId',
   createdAt: 'createdAt'
 } as const
@@ -112,7 +113,6 @@ export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof St
 export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  price: 'price',
   category: 'category',
   subCategory: 'subCategory',
   createdAt: 'createdAt'
@@ -124,6 +124,8 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const VariantScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  price: 'price',
+  stock: 'stock',
   productId: 'productId'
 } as const
 
@@ -131,24 +133,26 @@ export type VariantScalarFieldEnum = (typeof VariantScalarFieldEnum)[keyof typeo
 
 
 export const CartScalarFieldEnum = {
-  id: 'id'
+  id: 'id',
+  userId: 'userId'
 } as const
 
 export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
 
 
-export const Cart_Variant_UserScalarFieldEnum = {
+export const Cart_VariantScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   variantId: 'variantId',
-  cartId: 'cartId'
+  cartId: 'cartId',
+  quantity: 'quantity'
 } as const
 
-export type Cart_Variant_UserScalarFieldEnum = (typeof Cart_Variant_UserScalarFieldEnum)[keyof typeof Cart_Variant_UserScalarFieldEnum]
+export type Cart_VariantScalarFieldEnum = (typeof Cart_VariantScalarFieldEnum)[keyof typeof Cart_VariantScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
   id: 'id',
+  quantity: 'quantity',
   payment: 'payment',
   shipment: 'shipment',
   fee: 'fee',

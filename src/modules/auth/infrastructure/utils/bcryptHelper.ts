@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { IBcryptHelper } from "../domain/IBcryptHelper";
+import { IBcryptHelper } from "../../domain/interfaces/IBcryptHelper";
 
 export class bcryptHelper implements IBcryptHelper {
   async hash(password: string): Promise<string> {

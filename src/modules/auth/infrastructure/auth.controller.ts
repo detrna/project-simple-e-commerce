@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { RegisterUser } from "../use-cases/registerUser.usecase";
-import { authRepository } from "../infrastructure/auth.repository";
-import { userRepository } from "../../user/infrastructure/user.repository";
+import { authRepository } from "./auth.repository";
+import { UserAPI } from "../../user/public/UserAPI";
 
 export class AuthController {
   private registerUserUseCase: RegisterUser;
@@ -9,7 +9,7 @@ export class AuthController {
   constructor() {
     this.registerUserUseCase = new RegisterUser(
       new authRepository(),
-      new userRepository(),
+      new UserAPI(),
     );
   }
 
@@ -23,7 +23,7 @@ export class AuthController {
         confirm,
       });
       res.json(result);
-    } catch (e) {
+    } catch (e: any) {
       res.json(e.message);
     }
   }

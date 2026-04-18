@@ -184,7 +184,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   store?: Prisma.StoreListRelationFilter
   jwt?: Prisma.JwtListRelationFilter
-  cart?: Prisma.Cart_Variant_UserListRelationFilter
+  cart?: Prisma.CartListRelationFilter
   order?: Prisma.OrderListRelationFilter
 }
 
@@ -196,7 +196,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   store?: Prisma.StoreOrderByRelationAggregateInput
   jwt?: Prisma.jwtOrderByRelationAggregateInput
-  cart?: Prisma.Cart_Variant_UserOrderByRelationAggregateInput
+  cart?: Prisma.CartOrderByRelationAggregateInput
   order?: Prisma.OrderOrderByRelationAggregateInput
 }
 
@@ -211,7 +211,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   store?: Prisma.StoreListRelationFilter
   jwt?: Prisma.JwtListRelationFilter
-  cart?: Prisma.Cart_Variant_UserListRelationFilter
+  cart?: Prisma.CartListRelationFilter
   order?: Prisma.OrderListRelationFilter
 }, "id" | "email">
 
@@ -245,7 +245,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
 
@@ -257,7 +257,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -269,7 +269,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
 
@@ -281,7 +281,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -409,7 +409,7 @@ export type UserCreateWithoutJwtInput = {
   password: string
   createdAt?: Date | string
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
-  cart?: Prisma.Cart_Variant_UserCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
 
@@ -420,7 +420,7 @@ export type UserUncheckedCreateWithoutJwtInput = {
   password: string
   createdAt?: Date | string
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
-  cart?: Prisma.Cart_Variant_UserUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -447,7 +447,7 @@ export type UserUpdateWithoutJwtInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
-  cart?: Prisma.Cart_Variant_UserUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
 
@@ -458,7 +458,7 @@ export type UserUncheckedUpdateWithoutJwtInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
-  cart?: Prisma.Cart_Variant_UserUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -469,7 +469,7 @@ export type UserCreateWithoutStoreInput = {
   password: string
   createdAt?: Date | string
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
 
@@ -480,7 +480,7 @@ export type UserUncheckedCreateWithoutStoreInput = {
   password: string
   createdAt?: Date | string
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -507,7 +507,7 @@ export type UserUpdateWithoutStoreInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
 
@@ -518,7 +518,7 @@ export type UserUncheckedUpdateWithoutStoreInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -590,7 +590,7 @@ export type UserCreateWithoutOrderInput = {
   createdAt?: Date | string
   store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrderInput = {
@@ -601,7 +601,7 @@ export type UserUncheckedCreateWithoutOrderInput = {
   createdAt?: Date | string
   store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
-  cart?: Prisma.Cart_Variant_UserUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrderInput = {
@@ -628,7 +628,7 @@ export type UserUpdateWithoutOrderInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrderInput = {
@@ -639,7 +639,7 @@ export type UserUncheckedUpdateWithoutOrderInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
-  cart?: Prisma.Cart_Variant_UserUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -689,7 +689,7 @@ export type UserCountOutputTypeCountJwtArgs<ExtArgs extends runtime.Types.Extens
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountCartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.Cart_Variant_UserWhereInput
+  where?: Prisma.CartWhereInput
 }
 
 /**
@@ -753,7 +753,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     store: Prisma.$StorePayload<ExtArgs>[]
     jwt: Prisma.$jwtPayload<ExtArgs>[]
-    cart: Prisma.$Cart_Variant_UserPayload<ExtArgs>[]
+    cart: Prisma.$CartPayload<ExtArgs>[]
     order: Prisma.$OrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1158,7 +1158,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   store<T extends Prisma.User$storeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jwt<T extends Prisma.User$jwtArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jwtArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$jwtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Cart_Variant_UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   order<T extends Prisma.User$orderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1639,23 +1639,23 @@ export type User$jwtArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
  */
 export type User$cartArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Cart_Variant_User
+   * Select specific fields to fetch from the Cart
    */
-  select?: Prisma.Cart_Variant_UserSelect<ExtArgs> | null
+  select?: Prisma.CartSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Cart_Variant_User
+   * Omit specific fields from the Cart
    */
-  omit?: Prisma.Cart_Variant_UserOmit<ExtArgs> | null
+  omit?: Prisma.CartOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.Cart_Variant_UserInclude<ExtArgs> | null
-  where?: Prisma.Cart_Variant_UserWhereInput
-  orderBy?: Prisma.Cart_Variant_UserOrderByWithRelationInput | Prisma.Cart_Variant_UserOrderByWithRelationInput[]
-  cursor?: Prisma.Cart_Variant_UserWhereUniqueInput
+  include?: Prisma.CartInclude<ExtArgs> | null
+  where?: Prisma.CartWhereInput
+  orderBy?: Prisma.CartOrderByWithRelationInput | Prisma.CartOrderByWithRelationInput[]
+  cursor?: Prisma.CartWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.Cart_Variant_UserScalarFieldEnum | Prisma.Cart_Variant_UserScalarFieldEnum[]
+  distinct?: Prisma.CartScalarFieldEnum | Prisma.CartScalarFieldEnum[]
 }
 
 /**

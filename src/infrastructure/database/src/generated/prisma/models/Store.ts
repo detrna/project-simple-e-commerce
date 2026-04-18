@@ -26,21 +26,24 @@ export type AggregateStore = {
 
 export type StoreMinAggregateOutputType = {
   id: string | null
-  location: string | null
+  address: string | null
+  email: string | null
   userId: string | null
   createdAt: Date | null
 }
 
 export type StoreMaxAggregateOutputType = {
   id: string | null
-  location: string | null
+  address: string | null
+  email: string | null
   userId: string | null
   createdAt: Date | null
 }
 
 export type StoreCountAggregateOutputType = {
   id: number
-  location: number
+  address: number
+  email: number
   userId: number
   createdAt: number
   _all: number
@@ -49,21 +52,24 @@ export type StoreCountAggregateOutputType = {
 
 export type StoreMinAggregateInputType = {
   id?: true
-  location?: true
+  address?: true
+  email?: true
   userId?: true
   createdAt?: true
 }
 
 export type StoreMaxAggregateInputType = {
   id?: true
-  location?: true
+  address?: true
+  email?: true
   userId?: true
   createdAt?: true
 }
 
 export type StoreCountAggregateInputType = {
   id?: true
-  location?: true
+  address?: true
+  email?: true
   userId?: true
   createdAt?: true
   _all?: true
@@ -143,7 +149,8 @@ export type StoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type StoreGroupByOutputType = {
   id: string
-  location: string
+  address: string
+  email: string
   userId: string
   createdAt: Date
   _count: StoreCountAggregateOutputType | null
@@ -171,7 +178,8 @@ export type StoreWhereInput = {
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   id?: Prisma.StringFilter<"Store"> | string
-  location?: Prisma.StringFilter<"Store"> | string
+  address?: Prisma.StringFilter<"Store"> | string
+  email?: Prisma.StringFilter<"Store"> | string
   userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -179,7 +187,8 @@ export type StoreWhereInput = {
 
 export type StoreOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  location?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
@@ -190,7 +199,8 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
-  location?: Prisma.StringFilter<"Store"> | string
+  address?: Prisma.StringFilter<"Store"> | string
+  email?: Prisma.StringFilter<"Store"> | string
   userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -198,7 +208,8 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
 
 export type StoreOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  location?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.StoreCountOrderByAggregateInput
@@ -211,55 +222,63 @@ export type StoreScalarWhereWithAggregatesInput = {
   OR?: Prisma.StoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StoreScalarWhereWithAggregatesInput | Prisma.StoreScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Store"> | string
-  location?: Prisma.StringWithAggregatesFilter<"Store"> | string
+  address?: Prisma.StringWithAggregatesFilter<"Store"> | string
+  email?: Prisma.StringWithAggregatesFilter<"Store"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Store"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Store"> | Date | string
 }
 
 export type StoreCreateInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   createdAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   userId: string
   createdAt?: Date | string
 }
 
 export type StoreUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreCreateManyInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   userId: string
   createdAt?: Date | string
 }
 
 export type StoreUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -276,21 +295,24 @@ export type StoreOrderByRelationAggregateInput = {
 
 export type StoreCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type StoreMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type StoreMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -339,13 +361,15 @@ export type StoreUncheckedUpdateManyWithoutOwnerNestedInput = {
 
 export type StoreCreateWithoutOwnerInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   createdAt?: Date | string
 }
 
 export type StoreUncheckedCreateWithoutOwnerInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   createdAt?: Date | string
 }
 
@@ -380,32 +404,37 @@ export type StoreScalarWhereInput = {
   OR?: Prisma.StoreScalarWhereInput[]
   NOT?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
   id?: Prisma.StringFilter<"Store"> | string
-  location?: Prisma.StringFilter<"Store"> | string
+  address?: Prisma.StringFilter<"Store"> | string
+  email?: Prisma.StringFilter<"Store"> | string
   userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
 }
 
 export type StoreCreateManyOwnerInput = {
   id?: string
-  location: string
+  address: string
+  email: string
   createdAt?: Date | string
 }
 
 export type StoreUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type StoreUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -413,7 +442,8 @@ export type StoreUncheckedUpdateManyWithoutOwnerInput = {
 
 export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location?: boolean
+  address?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -421,7 +451,8 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location?: boolean
+  address?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -429,7 +460,8 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location?: boolean
+  address?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -437,12 +469,13 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type StoreSelectScalar = {
   id?: boolean
-  location?: boolean
+  address?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "location" | "userId" | "createdAt", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "address" | "email" | "userId" | "createdAt", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -460,7 +493,8 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    location: string
+    address: string
+    email: string
     userId: string
     createdAt: Date
   }, ExtArgs["result"]["store"]>
@@ -888,7 +922,8 @@ export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface StoreFieldRefs {
   readonly id: Prisma.FieldRef<"Store", 'String'>
-  readonly location: Prisma.FieldRef<"Store", 'String'>
+  readonly address: Prisma.FieldRef<"Store", 'String'>
+  readonly email: Prisma.FieldRef<"Store", 'String'>
   readonly userId: Prisma.FieldRef<"Store", 'String'>
   readonly createdAt: Prisma.FieldRef<"Store", 'DateTime'>
 }

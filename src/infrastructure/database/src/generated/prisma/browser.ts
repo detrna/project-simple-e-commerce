@@ -48,10 +48,10 @@ export type Variant = Prisma.VariantModel
  */
 export type Cart = Prisma.CartModel
 /**
- * Model Cart_Variant_User
+ * Model Cart_Variant
  * 
  */
-export type Cart_Variant_User = Prisma.Cart_Variant_UserModel
+export type Cart_Variant = Prisma.Cart_VariantModel
 /**
  * Model Order
  * 
