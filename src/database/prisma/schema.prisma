@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+
+  store Store[]
+  jwt jwt[]
+  cart Cart[]
+  order Order[]
+
+
+  createdAt DateTime @default(now())
+}
+
+model jwt {
+  id String @id @default(uuid())
+  token String
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Store {
+  id String @id @default(uuid())
+  address String
+  email String
+
+  userId String
+  owner User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) 
+}
+
+model Product {
+  id String @id @default(uuid())
+  name String
+
+  category Category
+  subCategory Sub_Category
+
+  variants Variant[]
+
+  createdAt DateTime @default(now())
+}
+
+enum Category {
+  ELECTRONICS
+  BOOKS
+  FASHION
+}
+
+enum Sub_Category {
+  PHONE
+  LAPTOP
+  TV
+  NOVEL
+  PSYCHOLOGY
+  HEALTH
+  SHIRT
+  JACKET
+  TROUSER
+}
+
+model Variant {
+  id String @id @default(uuid())
+  name String
+  price Float
+  stock Int
+
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+
+  cart Cart_Variant[]
+  order Order[]
+}
+
+model Cart {
+  id String @id @default(uuid())
+
+  Cart_Variant Cart_Variant[]
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Cart_Variant {
+  id String @id @default(uuid())
+  variantId String
+  cartId String
+  quantity Int
+
+  variant Variant @relation(fields: [variantId], references: [id])
+  cart Cart @relation(fields: [cartId], references: [id])
+}
+
+model Order {
+  id String @id @default(uuid())
+  quantity Int
+  payment Boolean @default(false)
+  shipment Shipment @default(WAITING_OWNER)
+  fee Float
+
+  transactionId String 
+  variantId String
+  userId String
+
+  transaction Transaction @relation(fields: [transactionId], references: [id])
+  variant Variant @relation(fields: [variantId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  reviews Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Shipment {
+  WAITING_OWNER
+  WAITING_COURIER
+  ON_THE_WAY
+  DELIVERED
+}
+
+model Transaction{
+  id String @id @default(uuid())
+
+  order Order[]
+
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id String @id @default(uuid())
+  score Int
+  content String
+  
+  orderId String
+  order Order @relation(fields: [orderId], references: [id])
+}

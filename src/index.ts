@@ -1,27 +1,14 @@
 import express from "express";
 import "dotenv/config";
-import authRoutes from "./modules/auth/infrastructure/auth.routes";
-
-const PORT = Number(process.env.PORT) || 3000;
-
 const app = express();
-
 app.use(express.json());
 
+import userRoutes from "./module/user/user.routes";
+import authRoutes from "./module/auth/auth.routes";
+
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 
-app.get("/", (req, res) => {
-  res.send("OK");
-});
-
-app.get("/test", (req, res) => {
-  res.send("OK");
-});
-
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "UP", timestamp: new Date().toISOString() });
-});
-
-app.listen(PORT, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log("http://localhost:3000");
 });
