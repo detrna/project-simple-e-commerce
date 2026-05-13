@@ -34,9 +34,12 @@ model Store {
   id String @id @default(uuid())
   address String
   email String
-
+  name String
   userId String
+
   owner User @relation(fields: [userId], references: [id])
+
+  products Product[]
 
   createdAt DateTime @default(now()) 
 }
@@ -44,12 +47,14 @@ model Store {
 model Product {
   id String @id @default(uuid())
   name String
+  storeId String
 
   category Category
   subCategory Sub_Category
 
   variants Variant[]
-
+  
+  store Store @relation(fields: [storeId], references: [id])
   createdAt DateTime @default(now())
 }
 

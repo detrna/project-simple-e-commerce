@@ -1216,6 +1216,7 @@ export const StoreScalarFieldEnum = {
   id: 'id',
   address: 'address',
   email: 'email',
+  name: 'name',
   userId: 'userId',
   createdAt: 'createdAt'
 } as const
@@ -1226,6 +1227,7 @@ export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof St
 export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  storeId: 'storeId',
   category: 'category',
   subCategory: 'subCategory',
   createdAt: 'createdAt'

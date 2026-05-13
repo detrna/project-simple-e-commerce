@@ -9,9 +9,11 @@ app.use(cookieParser());
 
 import userRoutes from "./module/user/user.routes";
 import authRoutes from "./module/auth/auth.routes";
+import productRoutes from "./module/product/product.routes"
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/products", productRoutes)
 
 app.get("/api/v1/token", (req, res) => {
   const header = req.headers.authorization
