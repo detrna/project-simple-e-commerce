@@ -1,3 +1,11 @@
+export interface UserDTO {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+}
+
+
 export class User {
   constructor(
     public id: string,
@@ -13,8 +21,9 @@ export class User {
     this.createdAt = createdAt;
   }
 
-  toSafeObject() {
+  toSafeObject(): UserDTO {
     const { password, ...rest } = this;
     return rest;
   }
 }
+

@@ -1,14 +1,24 @@
-import type { User as PrismaUser } from "../../database/src/generated/prisma/client";
-import { userRepository } from "./user.repository";
+import { UserDTO } from "./User";
+import { UserRepository } from "./user.repository";
 
-export class userService {
-  async getUser(reqBody: any): Promise<PrismaUser | null> {
-    const repo = new userRepository();
-    return await repo.getUser(reqBody.id);
+export class UserService {
+  async getUser(reqBody: any): Promise<UserDTO | null> {
+    const repo = new UserRepository();
+    const user = await repo.getUser(reqBody.id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user.toSafeObject();
   }
 
-  async getAllUser(): Promise<PrismaUser[]> {
-    const repo = new userRepository();
-    return await repo.getAllUser();
+  async getAllUser(): Promise<UserDTO[]> {
+    const repo = new UserRepository();
+    const users = await repo.getAllUser();
+
+    if(users.length === 0) {
+      throw new Error("No users found");
+    }
+
+    return users.map(user => user.toSafeObject());
   }
 }

@@ -1,17 +1,19 @@
 {
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.6.2",
     "nodemon": "^3.1.14",
     "prisma": "^7.7.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.7.0",
-    "@types/bcrypt": "^6.0.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
@@ -19,7 +21,8 @@
     "jsonwebtoken": "^9.0.3"
   },
   "prisma": {
-    "schema": "src/infrastructure/database/prisma/schema.prisma"
+    "schema": "src/infrastructure/database/prisma/schema.prisma",
+    "seed": "ts-node src/seed.ts"
   },
   "name": "simple-commerce",
   "version": "1.0.0",
@@ -37,7 +40,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/detrna/simple-commerce/issues"
   },

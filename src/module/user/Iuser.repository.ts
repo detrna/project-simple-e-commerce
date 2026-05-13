@@ -1,6 +1,8 @@
-import type { User as PrismaUser } from "../../database/src/generated/prisma/client";
+import { User } from "./User";
+
 
 export interface IUserRepository {
-  getUser(id: string): Promise<PrismaUser | null>;
-  getAllUser(): Promise<PrismaUser[]>;
+  getUser(id: string): Promise<User | null>;
+  getAllUser(): Promise<User[]>;
+  getUserByEmail(email: string): Promise<User | null>;
 }
