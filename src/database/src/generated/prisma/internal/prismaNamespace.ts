@@ -1229,7 +1229,7 @@ export const ProductScalarFieldEnum = {
   name: 'name',
   storeId: 'storeId',
   category: 'category',
-  subCategory: 'subCategory',
+  sub_category: 'sub_category',
   createdAt: 'createdAt'
 } as const
 
@@ -1364,16 +1364,16 @@ export type ListEnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'Sub_Category'
+ * Reference to a field of type 'Subcategory'
  */
-export type EnumSub_CategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sub_Category'>
+export type EnumSubcategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Subcategory'>
     
 
 
 /**
- * Reference to a field of type 'Sub_Category[]'
+ * Reference to a field of type 'Subcategory[]'
  */
-export type ListEnumSub_CategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sub_Category[]'>
+export type ListEnumSubcategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Subcategory[]'>
     
 
 

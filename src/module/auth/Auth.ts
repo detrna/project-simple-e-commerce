@@ -14,9 +14,5 @@ export interface LoginRequest {
 
 export interface jwtPayload {
   userId: string;
-  email: string;
-}
-
-export interface AuthRequest extends Request {
-  user: jwtPayload;
+  name: string;
 }

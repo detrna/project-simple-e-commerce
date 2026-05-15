@@ -18,7 +18,7 @@ export const Category = {
 export type Category = (typeof Category)[keyof typeof Category]
 
 
-export const Sub_Category = {
+export const Subcategory = {
   PHONE: 'PHONE',
   LAPTOP: 'LAPTOP',
   TV: 'TV',
@@ -30,7 +30,7 @@ export const Sub_Category = {
   TROUSER: 'TROUSER'
 } as const
 
-export type Sub_Category = (typeof Sub_Category)[keyof typeof Sub_Category]
+export type Subcategory = (typeof Subcategory)[keyof typeof Subcategory]
 
 
 export const Shipment = {

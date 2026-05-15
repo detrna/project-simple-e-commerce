@@ -1,5 +1,5 @@
 DATABASE_URL=""
-ACCESS_JWT_SECRET="your_access_jwt_secret_key"
-REFRESH_JWT_SECRET="your_refresh_jwt_secret_key"
+ACCESS_JWT_SECRET=""
+REFRESH_JWT_SECRET=""
 PORT=3000
 saltRounds=

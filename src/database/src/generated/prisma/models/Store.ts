@@ -190,7 +190,7 @@ export type StoreWhereInput = {
   name?: Prisma.StringFilter<"Store"> | string
   userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
-  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  ownerId?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
 }
 
@@ -201,7 +201,7 @@ export type StoreOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  owner?: Prisma.UserOrderByWithRelationInput
+  ownerId?: Prisma.UserOrderByWithRelationInput
   products?: Prisma.ProductOrderByRelationAggregateInput
 }
 
@@ -215,7 +215,7 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Store"> | string
   userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
-  owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  ownerId?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
 }, "id">
 
@@ -249,7 +249,7 @@ export type StoreCreateInput = {
   email: string
   name: string
   createdAt?: Date | string
-  owner: Prisma.UserCreateNestedOneWithoutStoreInput
+  ownerId: Prisma.UserCreateNestedOneWithoutStoreInput
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
 }
 
@@ -269,7 +269,7 @@ export type StoreUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
+  ownerId?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
 }
 
@@ -351,45 +351,45 @@ export type StoreScalarRelationFilter = {
   isNot?: Prisma.StoreWhereInput
 }
 
-export type StoreCreateNestedManyWithoutOwnerInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput> | Prisma.StoreCreateWithoutOwnerInput[] | Prisma.StoreUncheckedCreateWithoutOwnerInput[]
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerInput | Prisma.StoreCreateOrConnectWithoutOwnerInput[]
-  createMany?: Prisma.StoreCreateManyOwnerInputEnvelope
+export type StoreCreateNestedManyWithoutOwnerIdInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput> | Prisma.StoreCreateWithoutOwnerIdInput[] | Prisma.StoreUncheckedCreateWithoutOwnerIdInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerIdInput | Prisma.StoreCreateOrConnectWithoutOwnerIdInput[]
+  createMany?: Prisma.StoreCreateManyOwnerIdInputEnvelope
   connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
 }
 
-export type StoreUncheckedCreateNestedManyWithoutOwnerInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput> | Prisma.StoreCreateWithoutOwnerInput[] | Prisma.StoreUncheckedCreateWithoutOwnerInput[]
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerInput | Prisma.StoreCreateOrConnectWithoutOwnerInput[]
-  createMany?: Prisma.StoreCreateManyOwnerInputEnvelope
+export type StoreUncheckedCreateNestedManyWithoutOwnerIdInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput> | Prisma.StoreCreateWithoutOwnerIdInput[] | Prisma.StoreUncheckedCreateWithoutOwnerIdInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerIdInput | Prisma.StoreCreateOrConnectWithoutOwnerIdInput[]
+  createMany?: Prisma.StoreCreateManyOwnerIdInputEnvelope
   connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
 }
 
-export type StoreUpdateManyWithoutOwnerNestedInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput> | Prisma.StoreCreateWithoutOwnerInput[] | Prisma.StoreUncheckedCreateWithoutOwnerInput[]
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerInput | Prisma.StoreCreateOrConnectWithoutOwnerInput[]
-  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutOwnerInput | Prisma.StoreUpsertWithWhereUniqueWithoutOwnerInput[]
-  createMany?: Prisma.StoreCreateManyOwnerInputEnvelope
+export type StoreUpdateManyWithoutOwnerIdNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput> | Prisma.StoreCreateWithoutOwnerIdInput[] | Prisma.StoreUncheckedCreateWithoutOwnerIdInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerIdInput | Prisma.StoreCreateOrConnectWithoutOwnerIdInput[]
+  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutOwnerIdInput | Prisma.StoreUpsertWithWhereUniqueWithoutOwnerIdInput[]
+  createMany?: Prisma.StoreCreateManyOwnerIdInputEnvelope
   set?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   disconnect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   delete?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
-  update?: Prisma.StoreUpdateWithWhereUniqueWithoutOwnerInput | Prisma.StoreUpdateWithWhereUniqueWithoutOwnerInput[]
-  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutOwnerInput | Prisma.StoreUpdateManyWithWhereWithoutOwnerInput[]
+  update?: Prisma.StoreUpdateWithWhereUniqueWithoutOwnerIdInput | Prisma.StoreUpdateWithWhereUniqueWithoutOwnerIdInput[]
+  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutOwnerIdInput | Prisma.StoreUpdateManyWithWhereWithoutOwnerIdInput[]
   deleteMany?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
 }
 
-export type StoreUncheckedUpdateManyWithoutOwnerNestedInput = {
-  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput> | Prisma.StoreCreateWithoutOwnerInput[] | Prisma.StoreUncheckedCreateWithoutOwnerInput[]
-  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerInput | Prisma.StoreCreateOrConnectWithoutOwnerInput[]
-  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutOwnerInput | Prisma.StoreUpsertWithWhereUniqueWithoutOwnerInput[]
-  createMany?: Prisma.StoreCreateManyOwnerInputEnvelope
+export type StoreUncheckedUpdateManyWithoutOwnerIdNestedInput = {
+  create?: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput> | Prisma.StoreCreateWithoutOwnerIdInput[] | Prisma.StoreUncheckedCreateWithoutOwnerIdInput[]
+  connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOwnerIdInput | Prisma.StoreCreateOrConnectWithoutOwnerIdInput[]
+  upsert?: Prisma.StoreUpsertWithWhereUniqueWithoutOwnerIdInput | Prisma.StoreUpsertWithWhereUniqueWithoutOwnerIdInput[]
+  createMany?: Prisma.StoreCreateManyOwnerIdInputEnvelope
   set?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   disconnect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   delete?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
   connect?: Prisma.StoreWhereUniqueInput | Prisma.StoreWhereUniqueInput[]
-  update?: Prisma.StoreUpdateWithWhereUniqueWithoutOwnerInput | Prisma.StoreUpdateWithWhereUniqueWithoutOwnerInput[]
-  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutOwnerInput | Prisma.StoreUpdateManyWithWhereWithoutOwnerInput[]
+  update?: Prisma.StoreUpdateWithWhereUniqueWithoutOwnerIdInput | Prisma.StoreUpdateWithWhereUniqueWithoutOwnerIdInput[]
+  updateMany?: Prisma.StoreUpdateManyWithWhereWithoutOwnerIdInput | Prisma.StoreUpdateManyWithWhereWithoutOwnerIdInput[]
   deleteMany?: Prisma.StoreScalarWhereInput | Prisma.StoreScalarWhereInput[]
 }
 
@@ -407,7 +407,7 @@ export type StoreUpdateOneRequiredWithoutProductsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutProductsInput, Prisma.StoreUpdateWithoutProductsInput>, Prisma.StoreUncheckedUpdateWithoutProductsInput>
 }
 
-export type StoreCreateWithoutOwnerInput = {
+export type StoreCreateWithoutOwnerIdInput = {
   id?: string
   address: string
   email: string
@@ -416,7 +416,7 @@ export type StoreCreateWithoutOwnerInput = {
   products?: Prisma.ProductCreateNestedManyWithoutStoreInput
 }
 
-export type StoreUncheckedCreateWithoutOwnerInput = {
+export type StoreUncheckedCreateWithoutOwnerIdInput = {
   id?: string
   address: string
   email: string
@@ -425,30 +425,30 @@ export type StoreUncheckedCreateWithoutOwnerInput = {
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutStoreInput
 }
 
-export type StoreCreateOrConnectWithoutOwnerInput = {
+export type StoreCreateOrConnectWithoutOwnerIdInput = {
   where: Prisma.StoreWhereUniqueInput
-  create: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput>
 }
 
-export type StoreCreateManyOwnerInputEnvelope = {
-  data: Prisma.StoreCreateManyOwnerInput | Prisma.StoreCreateManyOwnerInput[]
+export type StoreCreateManyOwnerIdInputEnvelope = {
+  data: Prisma.StoreCreateManyOwnerIdInput | Prisma.StoreCreateManyOwnerIdInput[]
   skipDuplicates?: boolean
 }
 
-export type StoreUpsertWithWhereUniqueWithoutOwnerInput = {
+export type StoreUpsertWithWhereUniqueWithoutOwnerIdInput = {
   where: Prisma.StoreWhereUniqueInput
-  update: Prisma.XOR<Prisma.StoreUpdateWithoutOwnerInput, Prisma.StoreUncheckedUpdateWithoutOwnerInput>
-  create: Prisma.XOR<Prisma.StoreCreateWithoutOwnerInput, Prisma.StoreUncheckedCreateWithoutOwnerInput>
+  update: Prisma.XOR<Prisma.StoreUpdateWithoutOwnerIdInput, Prisma.StoreUncheckedUpdateWithoutOwnerIdInput>
+  create: Prisma.XOR<Prisma.StoreCreateWithoutOwnerIdInput, Prisma.StoreUncheckedCreateWithoutOwnerIdInput>
 }
 
-export type StoreUpdateWithWhereUniqueWithoutOwnerInput = {
+export type StoreUpdateWithWhereUniqueWithoutOwnerIdInput = {
   where: Prisma.StoreWhereUniqueInput
-  data: Prisma.XOR<Prisma.StoreUpdateWithoutOwnerInput, Prisma.StoreUncheckedUpdateWithoutOwnerInput>
+  data: Prisma.XOR<Prisma.StoreUpdateWithoutOwnerIdInput, Prisma.StoreUncheckedUpdateWithoutOwnerIdInput>
 }
 
-export type StoreUpdateManyWithWhereWithoutOwnerInput = {
+export type StoreUpdateManyWithWhereWithoutOwnerIdInput = {
   where: Prisma.StoreScalarWhereInput
-  data: Prisma.XOR<Prisma.StoreUpdateManyMutationInput, Prisma.StoreUncheckedUpdateManyWithoutOwnerInput>
+  data: Prisma.XOR<Prisma.StoreUpdateManyMutationInput, Prisma.StoreUncheckedUpdateManyWithoutOwnerIdInput>
 }
 
 export type StoreScalarWhereInput = {
@@ -469,7 +469,7 @@ export type StoreCreateWithoutProductsInput = {
   email: string
   name: string
   createdAt?: Date | string
-  owner: Prisma.UserCreateNestedOneWithoutStoreInput
+  ownerId: Prisma.UserCreateNestedOneWithoutStoreInput
 }
 
 export type StoreUncheckedCreateWithoutProductsInput = {
@@ -503,7 +503,7 @@ export type StoreUpdateWithoutProductsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  owner?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
+  ownerId?: Prisma.UserUpdateOneRequiredWithoutStoreNestedInput
 }
 
 export type StoreUncheckedUpdateWithoutProductsInput = {
@@ -515,7 +515,7 @@ export type StoreUncheckedUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type StoreCreateManyOwnerInput = {
+export type StoreCreateManyOwnerIdInput = {
   id?: string
   address: string
   email: string
@@ -523,7 +523,7 @@ export type StoreCreateManyOwnerInput = {
   createdAt?: Date | string
 }
 
-export type StoreUpdateWithoutOwnerInput = {
+export type StoreUpdateWithoutOwnerIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -532,7 +532,7 @@ export type StoreUpdateWithoutOwnerInput = {
   products?: Prisma.ProductUpdateManyWithoutStoreNestedInput
 }
 
-export type StoreUncheckedUpdateWithoutOwnerInput = {
+export type StoreUncheckedUpdateWithoutOwnerIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -541,7 +541,7 @@ export type StoreUncheckedUpdateWithoutOwnerInput = {
   products?: Prisma.ProductUncheckedUpdateManyWithoutStoreNestedInput
 }
 
-export type StoreUncheckedUpdateManyWithoutOwnerInput = {
+export type StoreUncheckedUpdateManyWithoutOwnerIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -587,7 +587,7 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name?: boolean
   userId?: boolean
   createdAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
@@ -599,7 +599,7 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   userId?: boolean
   createdAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -609,7 +609,7 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   userId?: boolean
   createdAt?: boolean
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectScalar = {
@@ -623,21 +623,21 @@ export type StoreSelectScalar = {
 
 export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "address" | "email" | "name" | "userId" | "createdAt", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Store$productsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type StoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  ownerId?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Store"
   objects: {
-    owner: Prisma.$UserPayload<ExtArgs>
+    ownerId: Prisma.$UserPayload<ExtArgs>
     products: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1041,7 +1041,7 @@ readonly fields: StoreFieldRefs;
  */
 export interface Prisma__StoreClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ownerId<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   products<T extends Prisma.Store$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

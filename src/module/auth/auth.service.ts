@@ -42,7 +42,7 @@ export class AuthService {
 
     const accessSecret = process.env.ACCESS_JWT_SECRET;
     const refreshTokenSecret = process.env.REFRESH_JWT_SECRET;
-    const jwtPayload = { userId: result.id, email: result.email };
+    const jwtPayload = { userId: result.id, name: result.name };
 
     const accessToken = generateToken(jwtPayload, accessSecret!, {expiresIn: "1d"});
     const refreshToken = generateToken(jwtPayload, refreshTokenSecret!, {expiresIn: "7d"});

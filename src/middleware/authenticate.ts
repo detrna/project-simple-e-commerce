@@ -1,8 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 import { verifyAccessToken } from "../shared/jwtHelper";
-import { AuthRequest } from "../module/auth/Auth";
 
-export function authenticate(req: AuthRequest, res: Response, next: NextFunction) {
+export function authenticate(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization
 
     if(!authHeader){
@@ -22,5 +21,4 @@ export function authenticate(req: AuthRequest, res: Response, next: NextFunction
     } catch (error) {
         return res.status(401).json({ error: "Invalid token." });
     }
-    next();
 }

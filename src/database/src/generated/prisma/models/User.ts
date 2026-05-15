@@ -243,7 +243,7 @@ export type UserCreateInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
@@ -255,7 +255,7 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
@@ -267,7 +267,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
@@ -279,7 +279,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -408,7 +408,7 @@ export type UserCreateWithoutJwtInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreCreateNestedManyWithoutOwnerIdInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
@@ -419,7 +419,7 @@ export type UserUncheckedCreateWithoutJwtInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerIdInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
@@ -446,7 +446,7 @@ export type UserUpdateWithoutJwtInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUpdateManyWithoutOwnerIdNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
@@ -457,7 +457,7 @@ export type UserUncheckedUpdateWithoutJwtInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerIdNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -528,7 +528,7 @@ export type UserCreateWithoutCartInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
   order?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
@@ -539,7 +539,7 @@ export type UserUncheckedCreateWithoutCartInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
   order?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
@@ -566,7 +566,7 @@ export type UserUpdateWithoutCartInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
@@ -577,7 +577,7 @@ export type UserUncheckedUpdateWithoutCartInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
   order?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -588,7 +588,7 @@ export type UserCreateWithoutOrderInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedManyWithoutUserInput
 }
@@ -599,7 +599,7 @@ export type UserUncheckedCreateWithoutOrderInput = {
   email: string
   password: string
   createdAt?: Date | string
-  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerInput
+  store?: Prisma.StoreUncheckedCreateNestedManyWithoutOwnerIdInput
   jwt?: Prisma.jwtUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
 }
@@ -626,7 +626,7 @@ export type UserUpdateWithoutOrderInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateManyWithoutUserNestedInput
 }
@@ -637,7 +637,7 @@ export type UserUncheckedUpdateWithoutOrderInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerNestedInput
+  store?: Prisma.StoreUncheckedUpdateManyWithoutOwnerIdNestedInput
   jwt?: Prisma.jwtUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
 }

@@ -1,29 +1,44 @@
 
-import { Product } from "./Product";
+import { CreateProductDTO, Product } from "./Product";
 import { ProductRepository } from "./product.repository";
 
 
 export class ProductService{
     public repo = new ProductRepository
-    async getAllProducts(id: any): Promise<Product[]>{
-        try{
-
+    async getAllProducts(id: string): Promise<Product[]>{
+      
             const result = await this.repo.getAllProductsByStoreId(id)
+            if(result.length === 0){
+                throw new Error("No products found")
+            }
             return result;
-        } catch(e){
-            throw new Error("Error")
-        }
+        
     }
-    async createProduct(body: any): Promise<Product>{
-        const result = await this.repo.createProduct(body)
-        return result;
+    async createProduct(data: CreateProductDTO): Promise<Product>{
+            const result = await this.repo.createProduct(data)
+            if(!result){
+                throw new Error("Failed to create product")
+            }
+            return result;
+        
     }
-    async getProducts(id: any): Promise<Product>{
+    async getProducts(id: string): Promise<Product>{
         const result = await this.repo.getProductById(id);
+        if(!result){
+            throw new Error("Product not found")
+        }
         return result
     }
-    async deleteProduct(id: any): Promise<boolean>{
+    async deleteProduct(id: string): Promise<boolean>{
+        const existingProduct = await this.repo.getProductById(id);
+        if(!existingProduct){
+            throw new Error("Product not found")
+        }
+
         const result = await this.repo.deleteProduct(id);
-        return true
+        if(!result){
+            throw new Error("Failed to delete product")
+        }
+        return result
     }
 }

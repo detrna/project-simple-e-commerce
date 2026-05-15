@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { Category, Shipment, Sub_Category } from "./database/src/generated/prisma/enums";
+import { Category, Shipment, Subcategory } from "./database/src/generated/prisma/enums";
 import { prisma } from "./shared/prismaHelper";
 
 
@@ -21,21 +21,21 @@ async function seed() {
       id: "product-1",
       name: "iPhone",
       category: Category.ELECTRONICS,
-      subCategory: Sub_Category.PHONE,
+      sub_category: Subcategory.PHONE,
       storeId: "store-1",
     },
     {
       id: "product-2",
       name: "MacBook",
       category: Category.ELECTRONICS,
-      subCategory: Sub_Category.LAPTOP,
+      sub_category: Subcategory.LAPTOP,
       storeId: "store-1",
     },
     {
       id: "product-3",
       name: "T-Shirt",
       category: Category.FASHION,
-      subCategory: Sub_Category.SHIRT,
+      sub_category: Subcategory.SHIRT,
       storeId: "store-2",
     },
   ];
@@ -103,12 +103,6 @@ async function seed() {
     { id: "review-3", score: 3, content: "Average", orderId: "order-3" },
   ];
 
-  const jwts = [
-    { id: "jwt-1", token: "token-1", userId: "user-1" },
-    { id: "jwt-2", token: "token-2", userId: "user-2" },
-    { id: "jwt-3", token: "token-3", userId: "user-3" },
-  ];
-
   try {
     await prisma.$transaction(async (tx) => {
       await tx.user.createMany({ data: users, skipDuplicates: true });
@@ -120,7 +114,6 @@ async function seed() {
       await tx.transaction.createMany({ data: transactions, skipDuplicates: true });
       await tx.order.createMany({ data: orders, skipDuplicates: true });
       await tx.review.createMany({ data: reviews, skipDuplicates: true });
-      await tx.jwt.createMany({ data: jwts, skipDuplicates: true });
     });
 
     console.log("✅ Seed success");
