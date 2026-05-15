@@ -24,7 +24,7 @@ export class UserRepository implements IUserRepository {
   async getAllUser(): Promise<User[]> {
     try {
       const rows = await prisma.user.findMany();
-      console.log(rows)
+
       return rows.map(UserMapper.toDomain);
 
     } catch (error) {
