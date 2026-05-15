@@ -1,11 +1,19 @@
+export type StoreDTO = {
+    id: string;
+    address: string;
+    email: string;
+    name: string;
+    userId: string;
+    createdAt: string;
+}
 export class Store {
     constructor(
-        public id: String,
-        public address: String,
-        public email: String,
-        public name: String,
-        public userId: String,
-        public createdAt: String,
+        public id: string,
+        public address: string,
+        public email: string,
+        public name: string,
+        public userId: string,
+        public createdAt: string,
     ) {
         this.id = id;
         this.address = address;
