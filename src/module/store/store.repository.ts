@@ -46,10 +46,21 @@ export class StoreRepository implements IStoreRepository {
 
             });
 
-            return StoreMapper.toDomain(createStore)
+            return StoreMapper.toDomain(rows)
         } catch (error) {
             console.error("Error data semua toko tidak ditemukan", error)
             throw new Error("Failed to fetch users");
+        }
+    }
+
+    async deleteStore(id: string): Promise<void> {
+        try {
+            const rows = await prisma.store.delete({
+                where: { id: id },
+            });
+        } catch (error) {
+            console.error("Error tidak dapat menghapus data store", error);
+            throw new Error("Failed to delete Store");
         }
     }
 }
