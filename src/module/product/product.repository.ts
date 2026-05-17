@@ -29,6 +29,7 @@ export class ProductRepository implements IProductRepository {
       const product = ProductMapper.toDomain(result);
       return product;
     } catch (e) {
+        console.log(e)
       throw new Error("Failed to create product");
     }
   }
