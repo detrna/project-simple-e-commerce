@@ -207,17 +207,17 @@ export type StoreOrderByWithRelationInput = {
 
 export type StoreWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId?: string
   AND?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   OR?: Prisma.StoreWhereInput[]
   NOT?: Prisma.StoreWhereInput | Prisma.StoreWhereInput[]
   address?: Prisma.StringFilter<"Store"> | string
   email?: Prisma.StringFilter<"Store"> | string
   name?: Prisma.StringFilter<"Store"> | string
-  userId?: Prisma.StringFilter<"Store"> | string
   createdAt?: Prisma.DateTimeFilter<"Store"> | Date | string
   ownerId?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
-}, "id">
+}, "id" | "userId">
 
 export type StoreOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

@@ -21,8 +21,8 @@
     "jsonwebtoken": "^9.0.3"
   },
   "prisma": {
-    "schema": "src/infrastructure/database/prisma/schema.prisma",
-    "seed": "ts-node src/seed.ts"
+    "schema": "src/database/prisma/schema.prisma",
+    "seed": "tsx src/seed.ts"
   },
   "name": "simple-commerce",
   "version": "1.0.0",

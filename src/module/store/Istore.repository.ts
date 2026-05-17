@@ -5,4 +5,5 @@ export interface IStoreRepository {
     getAllStore(): Promise<Store[]>;
     createStore(store: Store): Promise<Store>
     deleteStore(id: string): Promise<void>;
+    getStoreByUID(uid: string): Promise<Store>;
 }

@@ -35,7 +35,7 @@ model Store {
   address String
   email String
   name String
-  userId String
+  userId String @unique
 
   ownerId User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
