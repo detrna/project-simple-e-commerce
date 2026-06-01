@@ -1,19 +1,42 @@
 import "dotenv/config";
-import { Category, Shipment, Subcategory } from "./database/src/generated/prisma/enums";
+import {
+  Category,
+  Shipment,
+  Subcategory,
+} from "./database/src/generated/prisma/enums";
 import { prisma } from "./shared/prismaHelper";
-
 
 async function seed() {
   const users = [
-    { id: "user-1", name: "Budi", email: "budi@mail.com", password: "123456" },
-    { id: "user-2", name: "Siti", email: "siti@mail.com", password: "123456" },
-    { id: "user-3", name: "Andi", email: "andi@mail.com", password: "123456" },
+    { id: "user-1", name: "Budi", email: "budi@mail.com", password: "123" },
+    { id: "user-2", name: "Siti", email: "siti@mail.com", password: "123" },
+    { id: "user-3", name: "Andi", email: "andi@mail.com", password: "123" },
+    { id: "owner-1", name: "Owner", email: "owner@mail.com", password: "123" },
+    { id: "admin", name: "Admin", email: "admin@mail.com", password: "123" },
   ];
 
   const stores = [
-    { id: "store-1", address: "Jakarta", email: "store1@mail.com", name: "TokoA", userId: "user-1" },
-    { id: "store-2", address: "Bandung", email: "store2@mail.com", name: "TokoB", userId: "user-2" },
-    { id: "store-3", address: "Surabaya", email: "store3@mail.com", name: "TokoC", userId: "user-3" },
+    {
+      id: "store-1",
+      address: "Jakarta",
+      email: "store1@mail.com",
+      name: "TokoA",
+      userId: "owner-1",
+    },
+    {
+      id: "store-2",
+      address: "Bandung",
+      email: "store2@mail.com",
+      name: "TokoB",
+      userId: "user-2",
+    },
+    {
+      id: "store-3",
+      address: "Surabaya",
+      email: "store3@mail.com",
+      name: "TokoC",
+      userId: "user-3",
+    },
   ];
 
   const products = [
@@ -41,9 +64,27 @@ async function seed() {
   ];
 
   const variants = [
-    { id: "variant-1", name: "iPhone 128GB", price: 15000000, stock: 5, productId: "product-1" },
-    { id: "variant-2", name: "MacBook M2", price: 25000000, stock: 3, productId: "product-2" },
-    { id: "variant-3", name: "T-Shirt L", price: 150000, stock: 20, productId: "product-3" },
+    {
+      id: "variant-1",
+      name: "iPhone 128GB",
+      price: 15000000,
+      stock: 5,
+      productId: "product-1",
+    },
+    {
+      id: "variant-2",
+      name: "MacBook M2",
+      price: 25000000,
+      stock: 3,
+      productId: "product-2",
+    },
+    {
+      id: "variant-3",
+      name: "T-Shirt L",
+      price: 150000,
+      stock: 20,
+      productId: "product-3",
+    },
   ];
 
   const carts = [
@@ -58,11 +99,7 @@ async function seed() {
     { id: "cv-3", cartId: "cart-3", variantId: "variant-3", quantity: 3 },
   ];
 
-  const transactions = [
-    { id: "trx-1" },
-    { id: "trx-2" },
-    { id: "trx-3" },
-  ];
+  const transactions = [{ id: "trx-1" }, { id: "trx-2" }, { id: "trx-3" }];
 
   const orders = [
     {
@@ -110,8 +147,14 @@ async function seed() {
       await tx.product.createMany({ data: products, skipDuplicates: true });
       await tx.variant.createMany({ data: variants, skipDuplicates: true });
       await tx.cart.createMany({ data: carts, skipDuplicates: true });
-      await tx.cart_Variant.createMany({ data: cartVariants, skipDuplicates: true });
-      await tx.transaction.createMany({ data: transactions, skipDuplicates: true });
+      await tx.cart_Variant.createMany({
+        data: cartVariants,
+        skipDuplicates: true,
+      });
+      await tx.transaction.createMany({
+        data: transactions,
+        skipDuplicates: true,
+      });
       await tx.order.createMany({ data: orders, skipDuplicates: true });
       await tx.review.createMany({ data: reviews, skipDuplicates: true });
     });

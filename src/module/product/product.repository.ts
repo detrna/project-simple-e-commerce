@@ -6,12 +6,11 @@ import { ProductMapper } from "./product.mapper";
 export class ProductRepository implements IProductRepository {
   async getAllProductsByStoreId(id: string): Promise<Product[]> {
     try {
-
       const rows = await prisma.product.findMany({ where: { storeId: id } });
       const products = rows.map((rows) => ProductMapper.toDomain(rows));
       return products;
     } catch (e) {
-        console.log(e)
+      console.log(e);
       throw new Error("Failed to fetch products");
     }
   }
@@ -25,11 +24,11 @@ export class ProductRepository implements IProductRepository {
           storeId: data.storeId,
         },
       });
-   
+
       const product = ProductMapper.toDomain(result);
       return product;
     } catch (e) {
-        console.log(e)
+      console.log(e);
       throw new Error("Failed to create product");
     }
   }
@@ -39,7 +38,7 @@ export class ProductRepository implements IProductRepository {
       const product = ProductMapper.toDomain(rows);
       return product;
     } catch (e) {
-        console.log(e)
+      console.log(e);
       throw new Error("Failed to fetch product");
     }
   }
@@ -48,8 +47,23 @@ export class ProductRepository implements IProductRepository {
       const result = await prisma.product.delete({ where: { id: id } });
       return true;
     } catch (e) {
-        console.log(e)
+      console.log(e);
       throw new Error("Failed to delete product");
+    }
+  }
+  async getByOwnerId(
+    productId: string,
+    ownerId: string,
+  ): Promise<Product | null> {
+    try {
+      const rows = await prisma.product.findFirst({
+        where: { id: productId, store: { userId: ownerId } },
+      });
+      console.log("ROWS:", rows);
+      return ProductMapper.toDomain(rows);
+    } catch (e) {
+      console.error(e);
+      throw new Error("Failed to fetch product by owner id");
     }
   }
 }
