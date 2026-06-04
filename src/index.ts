@@ -9,6 +9,7 @@ import productRoutes from "./module/product/product.routes";
 import variantRoutes from "./module/variant/variant.routes";
 import storeRoutes from "./module/store/store.routes";
 import orderRoutes from "./module/order/order.routes";
+import transactionRoutes from "./module/transaction/transaction.routes";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/variants", variantRoutes);
 app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/transactions", transactionRoutes);
 
 app.get("/api/v1/token", (req, res) => {
   const header = req.headers.authorization;
@@ -43,3 +45,5 @@ app.listen(3000, () => {
 // Input Validation
 // Dependency injection
 // OAuth
+
+// Swap payment from Order to Transaction
