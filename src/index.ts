@@ -7,6 +7,8 @@ import userRoutes from "./module/user/user.routes";
 import authRoutes from "./module/auth/auth.routes";
 import productRoutes from "./module/product/product.routes";
 import variantRoutes from "./module/variant/variant.routes";
+import storeRoutes from "./module/store/store.routes";
+import orderRoutes from "./module/order/order.routes";
 
 const app = express();
 app.use(express.json());
@@ -16,6 +18,7 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/variants", variantRoutes);
+app.use("/api/v1/orders", orderRoutes);
 
 app.get("/api/v1/token", (req, res) => {
   const header = req.headers.authorization;
@@ -33,3 +36,10 @@ app.get("/api/v1/token", (req, res) => {
 app.listen(3000, () => {
   console.log("http://localhost:3000");
 });
+
+// TO-DO:
+// Response schema
+// Pagination
+// Input Validation
+// Dependency injection
+// OAuth

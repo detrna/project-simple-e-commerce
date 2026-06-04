@@ -40,4 +40,13 @@ export class VariantRepository implements IVariantRepository {
       throw new Error("Couldn't delete variant");
     }
   }
+
+  async getById(id: string): Promise<Variant | null> {
+    try {
+      const rows = await prisma.variant.findUnique({ where: { id: id } });
+      return rows;
+    } catch (e) {
+      throw e;
+    }
+  }
 }

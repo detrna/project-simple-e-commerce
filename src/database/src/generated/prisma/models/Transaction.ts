@@ -231,9 +231,9 @@ export type TransactionUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type TransactionScalarRelationFilter = {
-  is?: Prisma.TransactionWhereInput
-  isNot?: Prisma.TransactionWhereInput
+export type TransactionNullableScalarRelationFilter = {
+  is?: Prisma.TransactionWhereInput | null
+  isNot?: Prisma.TransactionWhereInput | null
 }
 
 export type TransactionCountOrderByAggregateInput = {
@@ -257,10 +257,12 @@ export type TransactionCreateNestedOneWithoutOrderInput = {
   connect?: Prisma.TransactionWhereUniqueInput
 }
 
-export type TransactionUpdateOneRequiredWithoutOrderNestedInput = {
+export type TransactionUpdateOneWithoutOrderNestedInput = {
   create?: Prisma.XOR<Prisma.TransactionCreateWithoutOrderInput, Prisma.TransactionUncheckedCreateWithoutOrderInput>
   connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutOrderInput
   upsert?: Prisma.TransactionUpsertWithoutOrderInput
+  disconnect?: Prisma.TransactionWhereInput | boolean
+  delete?: Prisma.TransactionWhereInput | boolean
   connect?: Prisma.TransactionWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutOrderInput, Prisma.TransactionUpdateWithoutOrderInput>, Prisma.TransactionUncheckedUpdateWithoutOrderInput>
 }
