@@ -5,8 +5,10 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.2",
+    "@types/supertest": "^7.2.0",
     "nodemon": "^3.1.14",
     "prisma": "^7.7.0",
+    "supertest": "^7.2.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
@@ -30,9 +32,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "npx tsx src/database/prisma/seed/seed.ts",
+    "test": "vitest",
     "dev": "nodemon --exec tsx ./src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test:order-service": "vitest test/order/order.service.test.ts",
+    "test:order-e2e": "vitest test/order/order.e2e.test.ts"
   },
   "repository": {
     "type": "git",

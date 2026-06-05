@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
-import { CreateOrderDTO } from "./Order";
+import { NextFunction, Request, Response } from "express";
+import { CreateOrderDTO, Order } from "./Order";
 import { OrderService } from "./order.service";
+import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
 
 export class OrderController {
   constructor(private orderService: OrderService) {
@@ -11,7 +12,7 @@ export class OrderController {
     try {
       const userId: string = req.user?.userId as string;
 
-      const result = await this.orderService.getMyOrders(userId);
+      const result: Order[] = await this.orderService.getMyOrders(userId);
 
       return res.json(result);
     } catch (e) {
@@ -25,15 +26,14 @@ export class OrderController {
 
   createOrder = async (req: Request, res: Response) => {
     try {
-      const quantity = req.body.quantity;
+      const quantity: number = req.body.quantity;
       const userId: string = req.user?.userId as string;
       const variantId: string = req.params.variantId as string;
+      const id: string = req.body?.orderId;
 
-      const payload: CreateOrderDTO = { quantity, userId, variantId };
+      const payload: CreateOrderDTO = { quantity, userId, variantId, id };
 
-      console.log(payload);
-
-      const result = await this.orderService.createOrder(payload);
+      const result: Order = await this.orderService.createOrder(payload);
 
       res.json(result);
     } catch (e) {
@@ -44,48 +44,47 @@ export class OrderController {
     }
   };
 
-  payOrder = async (req: Request, res: Response) => {
+  payOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const orderId: string = req.params.id as string;
       const userId: string = req.user?.userId as string;
       const payload = { orderId, userId };
 
-      const result = await this.orderService.payOrder(payload);
+      const result: Order = await this.orderService.payOrder(payload);
 
       res.json(result);
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-        res.json(e);
-      }
+      next(e);
     }
   };
 
-  getOrderByStoreId = async (req: Request, res: Response) => {
+  getOrderByStoreId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
-      const id = req.params.id as string;
+      const storeId: string = req.params.id as string;
+      const userId: string = req.user?.userId as string;
 
-      const result = await this.orderService.getOrderByStoreId(id);
+      const result: Order[] = await this.orderService.getOrderByStoreId({
+        storeId,
+        userId,
+      });
 
       res.json(result);
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-        res.json(e);
-      }
+      next(e);
     }
   };
 
-  getOrderById = async (req: Request, res: Response) => {
+  getOrderById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id: string = req.params.id as string;
-      const result = await this.orderService.getOrderById(id);
+      const result: Order = await this.orderService.getOrderById(id);
       res.json(result);
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-        res.json(e);
-      }
+      next(e);
     }
   };
 }

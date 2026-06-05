@@ -50,7 +50,7 @@ model Product {
   storeId String
 
   category Category
-  sub_category Subcategory
+  subcategory Subcategory
 
   variants Variant[]
   

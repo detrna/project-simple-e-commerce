@@ -1,0 +1,1 @@
+{"version":3,"file":"product.mapper.js","sourceRoot":"","sources":["../../../../src/module/product/product.mapper.ts"],"names":[],"mappings":";;;AAAA,uCAAmC;AAEnC,MAAa,aAAa;IACtB,MAAM,CAAC,QAAQ,CAAC,GAAQ;QACpB,OAAO,IAAI,iBAAO,CACd,GAAG,CAAC,EAAE,EACN,GAAG,CAAC,IAAI,EACR,GAAG,CAAC,QAAQ,EACZ,GAAG,CAAC,WAAW,EACf,GAAG,CAAC,SAAS,CAChB,CAAA;IACL,CAAC;CACJ;AAVD,sCAUC"}

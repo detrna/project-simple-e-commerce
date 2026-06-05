@@ -1,31 +1,33 @@
+import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
+import { Store } from "../store/Store";
+import { StoreRepository } from "../store/store.repository";
+import { Variant } from "../variant/Variant";
 import { VariantRepository } from "../variant/variant.repository";
 import { IOrderRepository } from "./Iorder.repository";
-import { CreateOrderDTO } from "./Order";
+import { CreateOrderDTO, Order } from "./Order";
 
 export class OrderService {
   constructor(private OrderRepository: IOrderRepository) {
     this.OrderRepository = OrderRepository;
   }
 
-  async getMyOrders(id: string) {
-    const result = await this.OrderRepository.getMyOrders(id);
-
-    if (result.length == 0) {
-      throw new Error("This user has yet to have any orders");
-    }
+  async getMyOrders(id: string): Promise<Order[]> {
+    const result: Order[] = await this.OrderRepository.getMyOrders(id);
 
     return result;
   }
 
-  async createOrder(data: CreateOrderDTO) {
+  async createOrder(data: CreateOrderDTO): Promise<Order> {
     const variantRepository = new VariantRepository();
-    const existingVariant = await variantRepository.getById(data.variantId);
+    const existingVariant: Variant | null = await variantRepository.getById(
+      data.variantId,
+    );
 
     if (!existingVariant) {
       throw new Error("Couldn't found this product's variant");
     }
 
-    const result = await this.OrderRepository.createOrder(data);
+    const result: Order = await this.OrderRepository.createOrder(data);
 
     if (!result) {
       throw new Error("Failed to create order");
@@ -34,14 +36,16 @@ export class OrderService {
     return result;
   }
 
-  async payOrder(data: { userId: string; orderId: string }) {
-    const existingOrder = await this.OrderRepository.getOrderById(data.orderId);
+  async payOrder(data: { userId: string; orderId: string }): Promise<Order> {
+    const existingOrder: Order | null = await this.OrderRepository.getOrderById(
+      data.orderId,
+    );
 
     if (existingOrder?.userId !== data.userId) {
-      throw new Error("This user didn't own this order");
+      throw new UnauthorizedError("This user didn't own the order");
     }
 
-    const result = await this.OrderRepository.payOrder(data.orderId);
+    const result: Order = await this.OrderRepository.payOrder(data.orderId);
 
     if (!result) {
       throw new Error("Failed to make a payment to the order");
@@ -50,21 +54,30 @@ export class OrderService {
     return result;
   }
 
-  async getOrderByStoreId(id: string) {
-    const result = await this.OrderRepository.getOrdersByStoreId(id);
+  async getOrderByStoreId(data: { storeId: string; userId: string }) {
+    const storeRepo = new StoreRepository();
+    const store: Store | null = await storeRepo.getStore(data.storeId);
 
-    if (result.length == 0) {
-      throw new Error("This store has yet to receive any order");
+    if (!store) {
+      throw new BadRequestError("the requested store didn't exist");
     }
+
+    if (store.userId !== data.userId) {
+      throw new UnauthorizedError("the user didn't own this store");
+    }
+
+    const result: Order[] = await this.OrderRepository.getOrdersByStoreId(
+      data.storeId,
+    );
 
     return result;
   }
 
   async getOrderById(id: string) {
-    const result = await this.OrderRepository.getOrderById(id);
+    const result: Order | null = await this.OrderRepository.getOrderById(id);
 
     if (!result) {
-      throw new Error("Order not found");
+      throw new BadRequestError("Order didn't exist");
     }
 
     return result;

@@ -20,7 +20,7 @@ export class ProductRepository implements IProductRepository {
         data: {
           name: data.name,
           category: data.category,
-          sub_category: data.subcategory,
+          subcategory: data.subcategory,
           storeId: data.storeId,
         },
       });

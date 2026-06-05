@@ -1,0 +1,1 @@
+{"version":3,"file":"prisma.config.js","sourceRoot":"","sources":["../prisma.config.ts"],"names":[],"mappings":";;AAAA,mFAAmF;AACnF,uCAAuC;AACvC,8BAA8B;AAC9B,yBAAuB;AACvB,0CAA6C;AAG7C,kBAAe,IAAA,qBAAY,EAAC;IAC1B,MAAM,EAAE,mCAAmC;IAC3C,UAAU,EAAE;QACV,IAAI,EAAE,gCAAgC;QACtC,IAAI,EAAE,aAAa;KACpB;IACD,UAAU,EAAE;QACV,GAAG,EAAE,OAAO,CAAC,GAAG,CAAC,cAAc,CAAC;KACjC;CACF,CAAC,CAAC"}
