@@ -1,16 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { OrderService } from "../../src/module/order/order.service";
 import { CreateOrderDTO } from "../../src/module/order/Order";
+import { mockRepository } from "../container/repository.mock";
+import { mockService } from "../container/service.mock";
 
-const repo = {
-  getMyOrders: vi.fn(),
-  getOrderById: vi.fn(),
-  createOrder: vi.fn(),
-  payOrder: vi.fn(),
-  getOrdersByStoreId: vi.fn(),
-};
-
-const service = new OrderService(repo as any);
+const repo = mockRepository.order;
+const service = mockService.order;
 
 describe("getMyOrders", () => {
   it("should return authenticated user's list of orders", async () => {

@@ -10,7 +10,7 @@ import variantRoutes from "./module/variant/variant.routes";
 import storeRoutes from "./module/store/store.routes";
 import orderRoutes from "./module/order/order.routes";
 import transactionRoutes from "./module/transaction/transaction.routes";
-import { errorHandler } from "./middleware/ErrorHandler";
+import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
 app.use(express.json());

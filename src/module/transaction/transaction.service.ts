@@ -1,11 +1,17 @@
 import { Order } from "../../database/src/generated/prisma/client";
+import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
 import { orderRepository } from "../order/order.container";
+import { OrderRepository } from "../order/order.repository";
 import { ITransactionRepository } from "./Itransaction.repository";
 import { Transaction } from "./Transaction";
 
 export class TransactionService {
-  constructor(private repo: ITransactionRepository) {
+  constructor(
+    private repo: ITransactionRepository,
+    private orderRepo: OrderRepository,
+  ) {
     this.repo = repo;
+    this.orderRepo = orderRepo;
   }
 
   getMyTransactions = async (userId: string): Promise<Transaction[]> => {
@@ -39,17 +45,17 @@ export class TransactionService {
     orderIds: string[];
     userId: string;
   }): Promise<Transaction> => {
-    const existingOrders: (Order | null)[] = await Promise.all(
-      data.orderIds.map((orderId) => orderRepository.getOrderById(orderId)),
+    const existingOrders: Order[] = await this.orderRepo.getOrdersByIds(
+      data.orderIds,
     );
 
-    existingOrders.forEach((order) => {
-      if (!order) {
-        throw new Error("Couldn't find one of the orders");
-      }
+    if (existingOrders.length !== data.orderIds.length) {
+      throw new BadRequestError("Couldn't find one of the requested order");
+    }
 
+    existingOrders.forEach((order) => {
       if (order.userId !== data.userId) {
-        throw new Error("This user didn't own one of the orders");
+        throw new UnauthorizedError("This user didn't own one of the orders");
       }
     });
 

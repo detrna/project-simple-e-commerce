@@ -6,6 +6,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.2",
     "@types/supertest": "^7.2.0",
+    "@vitest/coverage-v8": "^4.1.8",
     "nodemon": "^3.1.14",
     "prisma": "^7.7.0",
     "supertest": "^7.2.2",
@@ -37,7 +38,9 @@
     "dev": "nodemon --exec tsx ./src/index.ts",
     "build": "tsc",
     "test:order-service": "vitest test/order/order.service.test.ts",
-    "test:order-e2e": "vitest test/order/order.e2e.test.ts"
+    "test:order-e2e": "vitest test/order/order.e2e.test.ts",
+    "test:trx-service": "vitest test/transaction/transaction.service.test.ts",
+    "test:trx-e2e": "vitest test/transaction/transaction.e2e.test.ts"
   },
   "repository": {
     "type": "git",

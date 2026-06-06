@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { TransactionService } from "./transaction.service";
 
 export class TransactionController {
@@ -36,7 +36,11 @@ export class TransactionController {
     }
   };
 
-  createTransaction = async (req: Request, res: Response) => {
+  createTransaction = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
       const orderIds: string[] = req.body.orderIds;
       const userId: string = req.user?.userId as string;
@@ -45,8 +49,7 @@ export class TransactionController {
 
       return res.json(result);
     } catch (e) {
-      console.error(e);
-      return res.json(e);
+      next(e);
     }
   };
 }
