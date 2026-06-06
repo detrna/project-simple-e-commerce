@@ -13,7 +13,6 @@ export class OrderRepository implements IOrderRepository {
   }
   createOrder(data: CreateOrderDTO): Promise<Order> {
     try {
-      console.log(data.variantId);
       const result = prisma.order.create({ data });
       return result;
     } catch (e) {
@@ -44,6 +43,14 @@ export class OrderRepository implements IOrderRepository {
       const rows = prisma.order.findMany({
         where: { variant: { product: { storeId: id } } },
       });
+      return rows;
+    } catch (e) {
+      throw e;
+    }
+  }
+  getOrdersByIds(ids: string[]): Promise<Order[]> {
+    try {
+      const rows = prisma.order.findMany({ where: { id: { in: ids } } });
       return rows;
     } catch (e) {
       throw e;

@@ -1,14 +1,13 @@
 import { Order } from "../../database/src/generated/prisma/client";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
-import { orderRepository } from "../order/order.container";
-import { OrderRepository } from "../order/order.repository";
+import { IOrderRepository } from "../order/Iorder.repository";
 import { ITransactionRepository } from "./Itransaction.repository";
 import { Transaction } from "./Transaction";
 
 export class TransactionService {
   constructor(
     private repo: ITransactionRepository,
-    private orderRepo: OrderRepository,
+    private orderRepo: IOrderRepository,
   ) {
     this.repo = repo;
     this.orderRepo = orderRepo;
@@ -16,10 +15,6 @@ export class TransactionService {
 
   getMyTransactions = async (userId: string): Promise<Transaction[]> => {
     const result = await this.repo.getMyTransactions(userId);
-
-    if (result.length == 0) {
-      throw new Error("This user has yet to make transaction");
-    }
 
     return result;
   };
@@ -31,11 +26,11 @@ export class TransactionService {
     const result = await this.repo.getTransactionById(data.transactionId);
 
     if (!result) {
-      throw new Error("Couldn't find requested transaction");
+      throw new BadRequestError("Couldn't find requested transaction");
     }
 
     if (result?.order[0].userId !== data.userId) {
-      throw new Error("This user didn't own this transaction");
+      throw new UnauthorizedError("This user didn't own this transaction");
     }
 
     return result;
@@ -50,12 +45,18 @@ export class TransactionService {
     );
 
     if (existingOrders.length !== data.orderIds.length) {
-      throw new BadRequestError("Couldn't find one of the requested order");
+      throw new BadRequestError("Could not find one of the requested order");
     }
 
     existingOrders.forEach((order) => {
       if (order.userId !== data.userId) {
-        throw new UnauthorizedError("This user didn't own one of the orders");
+        throw new UnauthorizedError("This user did not own one of the orders");
+      }
+
+      if (order.transactionId) {
+        throw new BadRequestError(
+          `One of the orders already in another transaction`,
+        );
       }
     });
 

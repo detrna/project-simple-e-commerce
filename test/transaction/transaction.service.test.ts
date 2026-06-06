@@ -60,7 +60,9 @@ describe("getTransactionById", () => {
 
 describe("create", () => {
   it("create and persist transaction", async () => {
-    orderRepo.getOrdersByIds.mockResolvedValue([seed.orders[0]]);
+    orderRepo.getOrdersByIds.mockResolvedValue([
+      { ...seed.orders[0], transactionId: null },
+    ]);
 
     repo.create.mockResolvedValue({
       ...seed.transactions[0],

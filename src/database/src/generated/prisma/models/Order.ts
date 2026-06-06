@@ -285,6 +285,7 @@ export type OrderOrderByWithRelationInput = {
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  transactionId?: string
   AND?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   OR?: Prisma.OrderWhereInput[]
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
@@ -292,7 +293,6 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   payment?: Prisma.BoolFilter<"Order"> | boolean
   shipment?: Prisma.EnumShipmentFilter<"Order"> | $Enums.Shipment
   fee?: Prisma.FloatFilter<"Order"> | number
-  transactionId?: Prisma.StringNullableFilter<"Order"> | string | null
   variantId?: Prisma.StringFilter<"Order"> | string
   userId?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -301,7 +301,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   variant?: Prisma.XOR<Prisma.VariantScalarRelationFilter, Prisma.VariantWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviews?: Prisma.ReviewListRelationFilter
-}, "id">
+}, "id" | "transactionId">
 
 export type OrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

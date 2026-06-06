@@ -27,13 +27,13 @@ export class TransactionRepository implements ITransactionRepository {
     }
   }
 
-  async create(orderId: string[]): Promise<Transaction> {
+  async create(orderIds: string[]): Promise<Transaction> {
     try {
-      const result = await prisma.$transaction(async (tx) => {
+      const rows = await prisma.$transaction(async (tx) => {
         const newTransaction = await tx.transaction.create({});
 
         const orders = await tx.order.updateManyAndReturn({
-          where: { id: { in: orderId } },
+          where: { id: { in: orderIds } },
           data: { transactionId: newTransaction.id },
         });
 
@@ -46,7 +46,7 @@ export class TransactionRepository implements ITransactionRepository {
         return payload;
       });
 
-      return result;
+      return rows;
     } catch (e) {
       throw e;
     }

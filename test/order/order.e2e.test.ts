@@ -1,24 +1,12 @@
 import { describe, expect, it } from "vitest";
 import supertest from "supertest";
 import app from "../../src/index";
-import { generateToken } from "../../src/shared/jwtHelper";
 import "dotenv/config";
 import seed from "../../src/database/prisma/seed/seed-data";
-import { dbSeed } from "../../src/database/prisma/seed/seed";
-import { afterEach } from "node:test";
 import { prisma } from "../../src/shared/prismaHelper";
+import { mockToken } from "../container/token.mock";
 
-const userToken = generateToken(
-  { userId: "user-1", name: "budi" },
-  process.env.ACCESS_JWT_SECRET as string,
-  { expiresIn: "1d" },
-);
-
-const ownerToken = generateToken(
-  { userId: "owner-1", name: "owner" },
-  process.env.ACCESS_JWT_SECRET as string,
-  { expiresIn: "1d" },
-);
+const { userToken, ownerToken } = mockToken;
 
 describe("getMyOrders", () => {
   it("should return authenticated user's list of orders", async () => {

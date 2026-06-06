@@ -14,12 +14,15 @@ export class TransactionController {
 
       return res.json(result);
     } catch (e) {
-      console.error(e);
       return res.json(e);
     }
   };
 
-  getTransactionById = async (req: Request, res: Response) => {
+  getTransactionById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
       const transactionId: string = req.params.id as string;
       const userId: string = req.user?.userId as string;
@@ -31,8 +34,7 @@ export class TransactionController {
 
       return res.json(result);
     } catch (e) {
-      console.error(e);
-      return res.json(e);
+      next(e);
     }
   };
 
