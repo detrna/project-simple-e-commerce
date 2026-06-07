@@ -13,6 +13,7 @@ import transactionRoutes from "./module/transaction/transaction.routes";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -38,11 +39,9 @@ app.get("/api/v1/token", (req, res) => {
   res.send(payload);
 });
 
-export default app;
+app.listen(3000);
 
-app.listen(3000, () => {
-  console.log("http://localhost:3000");
-});
+export default app;
 
 // TO-DO:
 // Response schema

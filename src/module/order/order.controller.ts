@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateOrderDTO, Order } from "./Order";
 import { OrderService } from "./order.service";
-import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
+import { pagination } from "../../middleware/pagination";
+import { responseHelper, responseHelperDTO } from "../../shared/responseHelper";
 
 export class OrderController {
   constructor(private orderService: OrderService) {
@@ -11,10 +12,20 @@ export class OrderController {
   getMyOrders = async (req: Request, res: Response) => {
     try {
       const userId: string = req.user?.userId as string;
+      const pagination: pagination = req.pagination!;
 
-      const result: Order[] = await this.orderService.getMyOrders(userId);
+      const result: Order[] = await this.orderService.getMyOrders({
+        userId,
+        pagination,
+      });
 
-      return res.json(result);
+      const payload: responseHelperDTO = {
+        content: result,
+        message: "User's list of orders fetched successfully",
+        pagination,
+      };
+
+      return responseHelper(res, payload);
     } catch (e) {
       if (e instanceof Error) {
         console.error(e);

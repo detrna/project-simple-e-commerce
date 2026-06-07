@@ -1,16 +1,34 @@
+import { pagination } from "../../middleware/pagination";
 import { prisma } from "../../shared/prismaHelper";
 import { IOrderRepository } from "./Iorder.repository";
 import { CreateOrderDTO, Order } from "./Order";
 
 export class OrderRepository implements IOrderRepository {
-  async getMyOrders(id: string): Promise<Order[]> {
+  async getMyOrders(data: {
+    userId: string;
+    pagination: pagination;
+  }): Promise<Order[]> {
     try {
-      const rows = await prisma.order.findMany({ where: { userId: id } });
+      const rows = data.pagination.lastId
+        ? await prisma.order.findMany({
+            where: { userId: data.userId },
+            take: data.pagination.limit,
+            cursor: { id: data.pagination.lastId },
+            orderBy: { id: "asc" },
+            skip: 1,
+          })
+        : await prisma.order.findMany({
+            where: { userId: data.userId },
+            orderBy: { id: "asc" },
+            take: data.pagination.limit,
+          });
+
       return rows;
     } catch (e) {
       throw e;
     }
   }
+
   createOrder(data: CreateOrderDTO): Promise<Order> {
     try {
       const result = prisma.order.create({ data });

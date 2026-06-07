@@ -4,6 +4,7 @@ import { mockRepository } from "./repository.mock";
 
 export class mockService {
   static order: OrderService = new OrderService(mockRepository.order);
+  
   static transaction: TransactionService = new TransactionService(
     mockRepository.transaction,
     mockRepository.order,

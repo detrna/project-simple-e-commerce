@@ -1,3 +1,4 @@
+import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
 import { Store } from "../store/Store";
 import { StoreRepository } from "../store/store.repository";
@@ -11,8 +12,11 @@ export class OrderService {
     this.OrderRepository = OrderRepository;
   }
 
-  async getMyOrders(id: string): Promise<Order[]> {
-    const result: Order[] = await this.OrderRepository.getMyOrders(id);
+  async getMyOrders(data: {
+    userId: string;
+    pagination: pagination;
+  }): Promise<Order[]> {
+    const result: Order[] = await this.OrderRepository.getMyOrders(data);
 
     return result;
   }

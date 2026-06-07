@@ -1,3 +1,5 @@
+import { pagination } from "../middleware/pagination";
+
 declare global {
   namespace Express {
     interface Request {
@@ -5,6 +7,7 @@ declare global {
         userId: string;
         name: string;
       };
+      pagination?: pagination;
     }
   }
 }

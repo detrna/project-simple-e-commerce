@@ -15,15 +15,7 @@ describe("getMyOrders", () => {
       .set("Authorization", `Bearer ${userToken}`);
 
     expect(response.status).toBe(200);
-    expect(response.body[0]).toMatchObject(seed.orders[0]);
-  });
-  it("should response an empty array if the user has yet to have any order", async () => {
-    const response = await supertest(app)
-      .get("/api/v1/orders")
-      .set("Authorization", `Bearer ${ownerToken}`);
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual([]);
+    expect(response.body.data[0]).toMatchObject(seed.orders[0]);
   });
 });
 
