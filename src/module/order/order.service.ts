@@ -58,7 +58,11 @@ export class OrderService {
     return result;
   }
 
-  async getOrderByStoreId(data: { storeId: string; userId: string }) {
+  async getOrderByStoreId(data: {
+    storeId: string;
+    userId: string;
+    pagination: pagination;
+  }) {
     const storeRepo = new StoreRepository();
     const store: Store | null = await storeRepo.getStore(data.storeId);
 
@@ -70,9 +74,7 @@ export class OrderService {
       throw new UnauthorizedError("the user didn't own this store");
     }
 
-    const result: Order[] = await this.OrderRepository.getOrdersByStoreId(
-      data.storeId,
-    );
+    const result: Order[] = await this.OrderRepository.getOrdersByStoreId(data);
 
     return result;
   }

@@ -77,13 +77,21 @@ export class OrderController {
     try {
       const storeId: string = req.params.id as string;
       const userId: string = req.user?.userId as string;
+      const pagination: pagination = req.pagination!;
 
       const result: Order[] = await this.orderService.getOrderByStoreId({
         storeId,
         userId,
+        pagination,
       });
 
-      res.json(result);
+      const payload: responseHelperDTO = {
+        content: result,
+        message: "Store's order fetched successfully",
+        pagination,
+      };
+
+      responseHelper(res, payload);
     } catch (e) {
       next(e);
     }

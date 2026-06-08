@@ -10,16 +10,14 @@ export class OrderRepository implements IOrderRepository {
     pagination: pagination;
   }): Promise<Order[]> {
     try {
+      const { limit, cursor } = data.pagination;
       const rows = await prisma.order.findMany({
         where: { userId: data.userId },
-        take: data.pagination.limit,
-        cursor: data.pagination.cursor
-          ? { id: data.pagination.cursor }
-          : undefined,
+        take: limit,
+        skip: cursor ? 1 : 0,
+        cursor: cursor ? { id: cursor } : undefined,
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-        skip: data.pagination.cursor ? 1 : 0,
       });
-      console.log(data.userId, data.pagination.limit, data.pagination.cursor);
 
       return rows;
     } catch (e) {
@@ -55,10 +53,18 @@ export class OrderRepository implements IOrderRepository {
       throw e;
     }
   }
-  getOrdersByStoreId(id: string): Promise<Order[]> {
+  getOrdersByStoreId(data: {
+    storeId: string;
+    pagination: pagination;
+  }): Promise<Order[]> {
     try {
+      const { limit, cursor } = data.pagination;
       const rows = prisma.order.findMany({
-        where: { variant: { product: { storeId: id } } },
+        where: { variant: { product: { storeId: data.storeId } } },
+        take: limit + 1,
+        skip: cursor ? 1 : 0,
+        cursor: cursor ? { id: cursor } : undefined,
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       });
       return rows;
     } catch (e) {

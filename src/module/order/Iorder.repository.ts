@@ -9,6 +9,9 @@ export interface IOrderRepository {
   createOrder(data: CreateOrderDTO): Promise<Order>;
   getOrderById(id: string): Promise<Order | null>;
   payOrder(id: string): Promise<Order>;
-  getOrdersByStoreId(id: string): Promise<Order[]>;
+  getOrdersByStoreId(data: {
+    storeId: string;
+    pagination: pagination;
+  }): Promise<Order[]>;
   getOrdersByIds(id: string[]): Promise<Order[]>;
 }

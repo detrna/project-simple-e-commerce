@@ -84,6 +84,7 @@ describe("getOrderByStoreId", () => {
     const result = await service.getOrderByStoreId({
       storeId: "store-1",
       userId: "owner-1",
+      pagination: { limit: 0, cursor: null },
     });
 
     expect(result).toEqual(mockOrder);

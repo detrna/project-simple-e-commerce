@@ -6,7 +6,7 @@ import seed from "../../src/database/prisma/seed/seed-data";
 import { prisma } from "../../src/shared/prismaHelper";
 import { mockToken } from "../container/token.mock";
 
-const { userToken, testUserToken } = mockToken;
+const { userToken, testUserToken, ownerToken } = mockToken;
 
 describe("getMyOrders", () => {
   it("should return authenticated user's list of orders", async () => {
@@ -87,23 +87,41 @@ describe("payOrder", () => {
   });
 });
 
-// describe("GetOrderByStoreId", () => {
-//   it("should return orders based on its storeId", async () => {
-//     const response = await supertest(app)
-//       .get("/api/v1/stores/store-1/orders")
-//       .set("Authorization", `Bearer: ${ownerToken}`);
+describe("GetOrderByStoreId", () => {
+  it("should return orders based on its storeId", async () => {
+    const response = await supertest(app)
+      .get("/api/v1/stores/store-1/orders")
+      .set("Authorization", `Bearer: ${ownerToken}`);
 
-//     expect(response.body[0]).toMatchObject(seed.orders[0]);
-//   });
+    expect(response.body[0]).toMatchObject(seed.orders[0]);
+  });
 
-//   it("should throw unauthorized error if the user wasn't the store owner", async () => {
-//     const response = await supertest(app)
-//       .get("/api/v1/stores/store-1/orders")
-//       .set("Authorization", `Bearer: ${userToken}`);
+  it("should throw unauthorized error if the user wasn't the store owner", async () => {
+    const response = await supertest(app)
+      .get("/api/v1/stores/store-1/orders")
+      .set("Authorization", `Bearer: ${userToken}`);
 
-//     expect(response.status).toBe(403);
-//   });
-// });
+    expect(response.status).toBe(403);
+  });
+
+  it("should feature a cursor based pagination", async () => {
+    const ordersData = Array.from({ length: 10 }, (_, i) => ({
+      ...seed.orders[0],
+      id: `order-test-${i}`,
+      userId: "user-1",
+      transactionId: null,
+    }));
+
+    await prisma.order.createMany({ data: ordersData });
+
+    const response = await supertest(app)
+      .get("/api/v1/stores/store-1/orders?limit=5&cursor=order-1")
+      .set("Authorization", `Bearer ${ownerToken}`);
+
+    expect(response).toBe(200);
+    expect(response.body).toMatchObject(ordersData.splice(4, 10).reverse());
+  });
+});
 
 describe("getOrderById", () => {
   it("should return an order based on its id", async () => {
