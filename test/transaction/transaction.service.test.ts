@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import seed from "../../src/database/prisma/seed/seed-data";
+import seed from "../../src/database/prisma/seed(old)/seed-data";
 import { Transaction } from "../../src/module/transaction/Transaction";
 import { mockService } from "../container/service.mock";
 import { mockRepository } from "../container/repository.mock";
@@ -13,10 +13,15 @@ describe("getMyTransactions", () => {
   it("return user's list of transactions", async () => {
     repo.getMyTransactions.mockResolvedValue([seed.transactions[0]]);
 
-    const result: Transaction[] = await service.getMyTransactions("user-1");
+    const request = {
+      userId: "user-1",
+      pagination: { limit: 1, cursor: null },
+    };
+
+    const result: Transaction[] = await service.getMyTransactions(request);
 
     expect(result[0]).toMatchObject(seed.transactions[0]);
-    expect(repo.getMyTransactions).toHaveBeenCalledWith("user-1");
+    expect(repo.getMyTransactions).toHaveBeenCalledWith(request);
   });
 });
 

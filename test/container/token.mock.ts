@@ -30,4 +30,10 @@ export class mockToken {
     process.env.ACCESS_JWT_SECRET as string,
     { expiresIn: "1d" },
   );
+
+  static hubUserToken = generateToken(
+    { userId: "hub-user", name: "Hub User" },
+    process.env.ACCESS_JWT_SECRET as string,
+    { expiresIn: "1d" },
+  );
 }

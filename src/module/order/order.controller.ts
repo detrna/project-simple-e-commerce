@@ -20,7 +20,7 @@ export class OrderController {
       });
 
       const payload: responseHelperDTO = {
-        content: result,
+        result,
         message: "User's list of orders fetched successfully",
         pagination,
       };
@@ -46,7 +46,10 @@ export class OrderController {
 
       const result: Order = await this.orderService.createOrder(payload);
 
-      res.json(result);
+      return responseHelper(res, {
+        result,
+        message: "Order created successfully",
+      });
     } catch (e) {
       if (e instanceof Error) {
         console.error(e);
@@ -63,7 +66,10 @@ export class OrderController {
 
       const result: Order = await this.orderService.payOrder(payload);
 
-      res.json(result);
+      return responseHelper(res, {
+        result,
+        message: "Order paid successfully",
+      });
     } catch (e) {
       next(e);
     }
@@ -86,12 +92,12 @@ export class OrderController {
       });
 
       const payload: responseHelperDTO = {
-        content: result,
+        result,
         message: "Store's order fetched successfully",
         pagination,
       };
 
-      responseHelper(res, payload);
+      return responseHelper(res, payload);
     } catch (e) {
       next(e);
     }
@@ -101,7 +107,11 @@ export class OrderController {
     try {
       const id: string = req.params.id as string;
       const result: Order = await this.orderService.getOrderById(id);
-      res.json(result);
+
+      return responseHelper(res, {
+        result,
+        message: "Order fetched successfully",
+      });
     } catch (e) {
       next(e);
     }

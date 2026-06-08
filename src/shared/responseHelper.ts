@@ -3,33 +3,30 @@ import { pagination } from "../middleware/pagination";
 
 export function responseHelper(res: Response, data: responseHelperDTO) {
   const payload: responseSchema = {
-    data: data.content,
-    message: data.message,
-    meta: data.pagination
-      ? {
-          pagination: {
-            cursor: data.content[data.content.length - 1].id,
-            limit: data.pagination?.limit,
-          },
-        }
-      : null,
+    data: data.result,
+    meta: {
+      message: data.message,
+    },
   };
+
+  if (data.pagination)
+    payload.meta.pagination = {
+      limit: data.pagination.limit,
+      cursor: data.pagination.cursor,
+    };
 
   return res.status(200).json(payload);
 }
 
 export interface responseHelperDTO {
-  content: entity[];
+  result: entity | entity[];
   message: string;
   pagination?: pagination;
 }
 
 interface responseSchema {
-  data: entity[];
-  message: string;
-  meta: {
-    pagination: pagination;
-  } | null;
+  data: entity | entity[];
+  meta: { message: string; pagination?: pagination };
 }
 
 interface entity {

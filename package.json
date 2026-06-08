@@ -26,21 +26,21 @@
   },
   "prisma": {
     "schema": "src/database/prisma/schema.prisma",
-    "seed": "tsx src/seed.ts"
+    "seed": "npx tsx src/database/prisma/seed.ts"
   },
   "name": "simple-commerce",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "seed": "npx tsx src/database/prisma/seed/seed.ts",
-    "test": "vitest",
-    "dev": "nodemon --exec tsx ./src/index.ts",
     "build": "tsc",
-    "test:order-service": "vitest test/order/order.service.test.ts",
-    "test:order-e2e": "vitest test/order/order.e2e.test.ts",
-    "test:trx-service": "vitest test/transaction/transaction.service.test.ts",
-    "test:trx-e2e": "vitest test/transaction/transaction.e2e.test.ts"
+    "dev": "nodemon --exec tsx ./src/index.ts",
+    "seed": "npx tsx src/database/prisma/seed.ts",
+    "test": "vitest",
+    "test:order-service": "cls && vitest test/order/order.service.test.ts",
+    "test:order-e2e": "cls && vitest test/order/order.e2e.test.ts",
+    "test:trx-service": "clear | vitest test/transaction/transaction.service.test.ts",
+    "test:trx-e2e": "clear | vitest test/transaction/transaction.e2e.test.ts"
   },
   "repository": {
     "type": "git",

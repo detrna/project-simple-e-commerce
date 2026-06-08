@@ -115,7 +115,7 @@ model Order {
   shipment Shipment @default(WAITING_OWNER)
   fee Float @default(0)
 
-  transactionId String? @unique
+  transactionId String? 
   variantId String
   userId String
 

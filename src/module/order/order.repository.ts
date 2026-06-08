@@ -29,6 +29,7 @@ export class OrderRepository implements IOrderRepository {
   createOrder(data: CreateOrderDTO): Promise<Order> {
     try {
       const result = prisma.order.create({ data });
+
       return result;
     } catch (e) {
       throw e;
@@ -66,6 +67,7 @@ export class OrderRepository implements IOrderRepository {
         cursor: cursor ? { id: cursor } : undefined,
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       });
+
       return rows;
     } catch (e) {
       throw e;

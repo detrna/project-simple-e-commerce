@@ -1,5 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import { TransactionService } from "./transaction.service";
+import { pagination } from "../../middleware/pagination";
+import { responseHelper, responseHelperDTO } from "../../shared/responseHelper";
 
 export class TransactionController {
   constructor(private service: TransactionService) {
@@ -9,10 +11,20 @@ export class TransactionController {
   getMyTransactions = async (req: Request, res: Response) => {
     try {
       const userId: string = req.user?.userId as string;
+      const pagination: pagination = req.pagination!;
 
-      const result = await this.service.getMyTransactions(userId);
+      const result = await this.service.getMyTransactions({
+        userId,
+        pagination,
+      });
 
-      return res.json(result);
+      const payload: responseHelperDTO = {
+        result,
+        message: "User's list of transactions fetched successfully",
+        pagination,
+      };
+
+      return responseHelper(res, payload);
     } catch (e) {
       return res.json(e);
     }
@@ -32,7 +44,10 @@ export class TransactionController {
         userId,
       });
 
-      return res.json(result);
+      responseHelper(res, {
+        result,
+        message: "Transaction fetched successfully",
+      });
     } catch (e) {
       next(e);
     }
@@ -49,7 +64,10 @@ export class TransactionController {
 
       const result = await this.service.create({ orderIds, userId });
 
-      return res.json(result);
+      responseHelper(res, {
+        result,
+        message: "Transaction created successfully",
+      });
     } catch (e) {
       next(e);
     }

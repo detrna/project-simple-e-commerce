@@ -1,4 +1,5 @@
 import { Order } from "../../database/src/generated/prisma/client";
+import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
 import { IOrderRepository } from "../order/Iorder.repository";
 import { ITransactionRepository } from "./Itransaction.repository";
@@ -13,8 +14,11 @@ export class TransactionService {
     this.orderRepo = orderRepo;
   }
 
-  getMyTransactions = async (userId: string): Promise<Transaction[]> => {
-    const result = await this.repo.getMyTransactions(userId);
+  getMyTransactions = async (data: {
+    userId: string;
+    pagination: pagination;
+  }): Promise<Transaction[]> => {
+    const result = await this.repo.getMyTransactions(data);
 
     return result;
   };
@@ -22,7 +26,7 @@ export class TransactionService {
   getTransactionById = async (data: {
     userId: string;
     transactionId: string;
-  }): Promise<Transaction | null> => {
+  }): Promise<Transaction> => {
     const result = await this.repo.getTransactionById(data.transactionId);
 
     if (!result) {

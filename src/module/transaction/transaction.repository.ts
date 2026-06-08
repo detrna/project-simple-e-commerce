@@ -1,14 +1,24 @@
+import { pagination } from "../../middleware/pagination";
 import { prisma } from "../../shared/prismaHelper";
 import { ITransactionRepository } from "./Itransaction.repository";
 import { Transaction } from "./Transaction";
 
 export class TransactionRepository implements ITransactionRepository {
-  async getMyTransactions(userId: string): Promise<Transaction[]> {
+  async getMyTransactions(data: {
+    userId: string;
+    pagination: pagination;
+  }): Promise<Transaction[]> {
     try {
+      const { limit, cursor } = data.pagination;
       const rows = await prisma.transaction.findMany({
-        where: { order: { some: { userId: userId } } },
+        where: { order: { some: { userId: data.userId } } },
+        take: limit,
+        skip: cursor ? 1 : 0,
+        cursor: cursor ? { id: cursor } : undefined,
         include: { order: true },
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       });
+
       return rows;
     } catch (e) {
       throw e;
@@ -21,6 +31,7 @@ export class TransactionRepository implements ITransactionRepository {
         where: { id: id },
         include: { order: true },
       });
+
       return rows;
     } catch (e) {
       throw e;

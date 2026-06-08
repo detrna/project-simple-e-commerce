@@ -2,23 +2,26 @@ import { describe, expect, it, vi } from "vitest";
 import { CreateOrderDTO } from "../../src/module/order/Order";
 import { mockRepository } from "../container/repository.mock";
 import { mockService } from "../container/service.mock";
+import { SeedData } from "../../src/database/prisma/seed-data";
 
 const repo = mockRepository.order;
 const service = mockService.order;
+const data = SeedData.get();
 
 describe("getMyOrders", () => {
   it("should return authenticated user's list of orders", async () => {
-    const orders = [{ id: "order-1" }];
-
-    repo.getMyOrders.mockResolvedValue(orders);
-
-    const result = await service.getMyOrders({
+    const response = [{ id: "order-1" }];
+    const request = {
       userId: "user-1",
       pagination: { limit: 5, cursor: null },
-    });
+    };
 
-    expect(result).toEqual(orders);
-    expect(repo.getMyOrders).toHaveBeenCalledWith("user-1");
+    repo.getMyOrders.mockResolvedValue(response);
+
+    const result = await service.getMyOrders(request);
+
+    expect(result).toEqual(response);
+    expect(repo.getMyOrders).toHaveBeenCalledWith(request);
   });
 });
 
@@ -27,7 +30,7 @@ describe("createOrder", () => {
     const response = { id: "order-1" };
 
     const request: CreateOrderDTO = {
-      variantId: "variant-1",
+      variantId: data.variants[0].id,
       userId: "user-1",
       quantity: 1,
     };
@@ -74,20 +77,23 @@ describe("payOrder", () => {
 
 describe("getOrderByStoreId", () => {
   it("should return list of orders based on its storeId", async () => {
-    const mockOrder = [
+    const response = [
       { id: "order-1", storeId: "store-1" },
       { id: "order-2", storeId: "store-1" },
     ];
 
-    repo.getOrdersByStoreId.mockResolvedValue(mockOrder);
-
-    const result = await service.getOrderByStoreId({
-      storeId: "store-1",
-      userId: "owner-1",
+    const store = data.stores[0];
+    const request = {
+      storeId: store.id,
+      userId: store.userId,
       pagination: { limit: 0, cursor: null },
-    });
+    };
 
-    expect(result).toEqual(mockOrder);
-    expect(repo.getOrdersByStoreId).toHaveBeenCalledWith("store-1");
+    repo.getOrdersByStoreId.mockResolvedValue(response);
+
+    const result = await service.getOrderByStoreId(request);
+
+    expect(result).toEqual(response);
+    expect(repo.getOrdersByStoreId).toHaveBeenCalledWith(request);
   });
 });
