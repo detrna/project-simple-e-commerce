@@ -12,7 +12,10 @@ describe("getMyOrders", () => {
 
     repo.getMyOrders.mockResolvedValue(orders);
 
-    const result = await service.getMyOrders("user-1");
+    const result = await service.getMyOrders({
+      userId: "user-1",
+      pagination: { limit: 5, cursor: null },
+    });
 
     expect(result).toEqual(orders);
     expect(repo.getMyOrders).toHaveBeenCalledWith("user-1");

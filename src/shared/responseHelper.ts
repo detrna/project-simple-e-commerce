@@ -2,18 +2,18 @@ import { Response } from "express";
 import { pagination } from "../middleware/pagination";
 
 export function responseHelper(res: Response, data: responseHelperDTO) {
-  const payload: responseSchema = data.pagination
-    ? {
-        data: data.content,
-        message: data.message,
-        meta: {
+  const payload: responseSchema = {
+    data: data.content,
+    message: data.message,
+    meta: data.pagination
+      ? {
           pagination: {
             cursor: data.content[data.content.length - 1].id,
             limit: data.pagination?.limit,
           },
-        },
-      }
-    : { data: data.content, message: data.message };
+        }
+      : null,
+  };
 
   return res.status(200).json(payload);
 }
@@ -27,9 +27,9 @@ export interface responseHelperDTO {
 interface responseSchema {
   data: entity[];
   message: string;
-  meta?: {
+  meta: {
     pagination: pagination;
-  };
+  } | null;
 }
 
 interface entity {

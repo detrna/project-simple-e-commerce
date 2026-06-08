@@ -24,4 +24,10 @@ export class mockToken {
     process.env.ACCESS_JWT_SECRET as string,
     { expiresIn: "1d" },
   );
+
+  static testUserToken = generateToken(
+    { userId: "user-test-1", name: "budi" },
+    process.env.ACCESS_JWT_SECRET as string,
+    { expiresIn: "1d" },
+  );
 }
