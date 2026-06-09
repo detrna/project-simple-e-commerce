@@ -1,3 +1,4 @@
+import { ValidatedQuery } from "../middleware/inputValidation";
 import { pagination } from "../middleware/pagination";
 
 declare global {
@@ -8,6 +9,7 @@ declare global {
         name: string;
       };
       pagination?: pagination;
+      validatedQuery?: ValidatedQuery;
     }
   }
 }

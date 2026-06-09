@@ -1,4 +1,12 @@
-export interface Order {
+import { z } from "zod";
+import {
+  CreateOrderSchema,
+  GetMyOrdersSchema,
+  GetOrderByIdSchema,
+  GetOrdersByStoreIdSchema,
+} from "./order.schema";
+
+export type Order = {
   id: string;
   quantity: number;
   payment: boolean;
@@ -9,7 +17,7 @@ export interface Order {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 type Shipment =
   | "WAITING_OWNER"
@@ -17,9 +25,7 @@ type Shipment =
   | "ON_THE_WAY"
   | "DELIVERED";
 
-export interface CreateOrderDTO {
-  id?: string;
-  variantId: string;
-  quantity: number;
-  userId: string;
-}
+export type CreateOrderDTO = z.infer<typeof CreateOrderSchema>;
+export type GetOrderByStoreIdDTO = z.infer<typeof GetOrderByIdSchema>;
+export type GetMyOrdersDTO = z.infer<typeof GetMyOrdersSchema>;
+export type GetOrdersByStoreIdDTO = z.infer<typeof GetOrdersByStoreIdSchema>;

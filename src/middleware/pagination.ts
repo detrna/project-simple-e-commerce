@@ -1,18 +1,21 @@
 import { Request, Response, NextFunction } from "express";
+import { number, string, z } from "zod";
 
-export interface pagination {
-  limit: number;
-  cursor: string | null;
-}
+const defaultLimit = 10;
+
+export const PaginationSchema = z.object({
+  limit: number().default(defaultLimit),
+  cursor: string().nullable().default(null),
+});
+
+export type pagination = z.infer<typeof PaginationSchema>;
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
-  const defaultLimit = 10;
-
-  let limit: number = Number(req.query.limit) || defaultLimit;
-  const cursor: string | null = req.query.cursor?.toString() ?? null;
+  let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;
+  const cursor: string | null = req.validatedQuery?.cursor?.toString() ?? null;
 
   if (limit > 50) limit = defaultLimit;
-  if (limit < 0) limit = defaultLimit;
+  if (limit <= 0) limit = defaultLimit;
 
   const pagination: pagination = { limit, cursor };
 

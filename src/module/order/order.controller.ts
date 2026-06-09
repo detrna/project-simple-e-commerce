@@ -40,9 +40,8 @@ export class OrderController {
       const quantity: number = req.body.quantity;
       const userId: string = req.user?.userId as string;
       const variantId: string = req.params.variantId as string;
-      const id: string = req.body?.orderId;
 
-      const payload: CreateOrderDTO = { quantity, userId, variantId, id };
+      const payload: CreateOrderDTO = { quantity, userId, variantId };
 
       const result: Order = await this.orderService.createOrder(payload);
 
@@ -75,7 +74,7 @@ export class OrderController {
     }
   };
 
-  getOrderByStoreId = async (
+  getOrdersByStoreId = async (
     req: Request,
     res: Response,
     next: NextFunction,

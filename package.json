@@ -39,8 +39,8 @@
     "test": "vitest",
     "test:order-service": "cls && vitest test/order/order.service.test.ts",
     "test:order-e2e": "cls && vitest test/order/order.e2e.test.ts",
-    "test:trx-service": "clear | vitest test/transaction/transaction.service.test.ts",
-    "test:trx-e2e": "clear | vitest test/transaction/transaction.e2e.test.ts"
+    "test:trx-service": "cls && vitest test/transaction/transaction.service.test.ts",
+    "test:trx-e2e": "cls && vitest test/transaction/transaction.e2e.test.ts"
   },
   "repository": {
     "type": "git",

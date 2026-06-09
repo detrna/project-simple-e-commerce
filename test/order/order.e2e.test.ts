@@ -2,12 +2,11 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import supertest from "supertest";
 import app from "../../src/index";
 import "dotenv/config";
-import seed from "../../src/database/prisma/seed(old)/seed-data";
 import { prisma } from "../../src/shared/prismaHelper";
 import { mockToken } from "../container/token.mock";
 import { SeedData } from "../../src/database/prisma/seed-data";
 
-const { userToken, ownerToken, hubUserToken } = mockToken;
+const { userToken, hubUserToken } = mockToken;
 const data = SeedData.get();
 
 describe("getMyOrders", () => {
@@ -137,11 +136,11 @@ describe("getOrderById", () => {
     });
 
     const result = await supertest(app)
-      .get("/api/v1/orders/order-1")
+      .get("/api/v1/orders/order-1?test=1")
       .set("Authorization", `Bearer ${userToken}`);
 
-    expect(result.status).toBe(200);
     expect(result.body.data).toMatchObject(orderResponse!);
+    expect(result.status).toBe(200);
   });
 
   it("should throw a bad request error if the order didn't exist", async () => {

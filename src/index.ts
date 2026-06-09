@@ -48,6 +48,3 @@ export default app;
 // Pagination
 // Input Validation
 // Dependency injection
-// OAuth
-
-// Swap payment from Order to Transaction
