@@ -1,10 +1,5 @@
 import { z } from "zod";
-import {
-  CreateOrderSchema,
-  GetMyOrdersSchema,
-  GetOrderByIdSchema,
-  GetOrdersByStoreIdSchema,
-} from "./order.schema";
+import { GetOrderByIdSchema } from "./order.schema";
 
 export type Order = {
   id: string;
@@ -25,7 +20,10 @@ type Shipment =
   | "ON_THE_WAY"
   | "DELIVERED";
 
-export type CreateOrderDTO = z.infer<typeof CreateOrderSchema>;
+export type CreateOrderDTO = {
+  variantId: string;
+  userId: string;
+  quantity: number;
+};
+
 export type GetOrderByStoreIdDTO = z.infer<typeof GetOrderByIdSchema>;
-export type GetMyOrdersDTO = z.infer<typeof GetMyOrdersSchema>;
-export type GetOrdersByStoreIdDTO = z.infer<typeof GetOrdersByStoreIdSchema>;

@@ -2,9 +2,8 @@ import { number, string, z } from "zod";
 import { PaginationSchema } from "../../middleware/pagination";
 
 export const CreateOrderSchema = z.object({
-  variantId: string(),
-  userId: string(),
-  quantity: number(),
+  params: z.object({ variantId: string() }),
+  body: z.object({ quantity: number() }),
 });
 
 export const GetOrderByIdSchema = z.object({
@@ -12,11 +11,14 @@ export const GetOrderByIdSchema = z.object({
 });
 
 export const GetMyOrdersSchema = z.object({
-  pagination: PaginationSchema,
-  userId: string(),
+  query: PaginationSchema,
 });
 
 export const GetOrdersByStoreIdSchema = z.object({
-  storeId: string(),
-  pagination: PaginationSchema,
+  params: z.object({ storeId: string() }),
+  query: PaginationSchema,
+});
+
+export const PayOrderSchema = z.object({
+  params: z.object({ id: string() }),
 });

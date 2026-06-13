@@ -27,14 +27,14 @@ describe("getMyOrders", () => {
       .get(`/api/v1/orders?limit=${limit}&cursor=${cursor}`)
       .set("Authorization", `Bearer ${mockToken.hubUserToken}`);
 
-    expect(response.status).toBe(200);
     expect(response.body.data).toMatchObject(orders.slice(skip, skip + limit));
+    expect(response.status).toBe(200);
   });
 });
 
 describe("createOrder", () => {
   afterAll(async () => {
-    await prisma.order.delete({ where: { id: "order-test" } });
+    await prisma.order.deleteMany({ where: { id: "order-test" } });
   });
 
   it("should create an order in the database", async () => {

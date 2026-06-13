@@ -4,11 +4,14 @@ import { number, string, z } from "zod";
 const defaultLimit = 10;
 
 export const PaginationSchema = z.object({
-  limit: number().default(defaultLimit),
+  limit: string().default(defaultLimit.toString()),
   cursor: string().nullable().default(null),
 });
 
-export type pagination = z.infer<typeof PaginationSchema>;
+export type pagination = {
+  limit: number;
+  cursor: string | null;
+};
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
   let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;
