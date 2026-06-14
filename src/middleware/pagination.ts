@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { number, string, z } from "zod";
+import { string, z } from "zod";
 
 const defaultLimit = 10;
 
@@ -8,10 +8,10 @@ export const PaginationSchema = z.object({
   cursor: string().nullable().default(null),
 });
 
-export type pagination = {
+export interface pagination {
   limit: number;
   cursor: string | null;
-};
+}
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
   let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;

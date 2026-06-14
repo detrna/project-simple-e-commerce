@@ -8,6 +8,7 @@ import {
   GetOrderByIdSchema,
   PayOrderSchema,
 } from "./order.schema";
+import { getCache, getPaginatedCache } from "../../middleware/getCache";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.get(
   authenticate,
   validate(GetMyOrdersSchema),
   paginate,
+  getPaginatedCache("order"),
   orderController.getMyOrders,
 );
 
@@ -23,6 +25,7 @@ router.get(
   "/:id",
   authenticate,
   validate(GetOrderByIdSchema),
+  getCache({ entityName: "order", paramsKey: "id" }),
   orderController.getOrderById,
 );
 

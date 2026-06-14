@@ -136,7 +136,7 @@ describe("getOrderById", () => {
     });
 
     const result = await supertest(app)
-      .get("/api/v1/orders/order-1?test=1")
+      .get("/api/v1/orders/order-1")
       .set("Authorization", `Bearer ${userToken}`);
 
     expect(result.body.data).toMatchObject(orderResponse!);

@@ -42,9 +42,3 @@ app.get("/api/v1/token", (req, res) => {
 app.listen(3000);
 
 export default app;
-
-// TO-DO:
-// Response schema
-// Pagination
-// Input Validation
-// Dependency injection

@@ -1,5 +1,6 @@
 import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
+import { redis } from "../../shared/redisHelper";
 import { Store } from "../store/Store";
 import { StoreRepository } from "../store/store.repository";
 import { Variant } from "../variant/Variant";
@@ -17,6 +18,15 @@ export class OrderService {
     pagination: pagination;
   }): Promise<Order[]> {
     const result: Order[] = await this.OrderRepository.getMyOrders(data);
+
+    if (result.length !== 0) {
+      redis.setPaginated({
+        entityName: "order",
+        userId: data.userId,
+        pagination: data.pagination,
+        value: result,
+      });
+    }
 
     return result;
   }
@@ -85,6 +95,8 @@ export class OrderService {
     if (!result) {
       throw new BadRequestError("Order didn't exist");
     }
+
+    redis.set({ entityName: "order", key: result.id, value: result });
 
     return result;
   }
