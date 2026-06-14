@@ -12,7 +12,3 @@ export const CreateTransactionSchema = z.object({
 export const GetTransactionByIdSchema = z.object({
   params: z.object({ id: z.string() }),
 });
-
-// router.get("", authenticate, paginate, transactionController.getMyTransactions);
-// router.get("/:id", authenticate, transactionController.getTransactionById);
-// router.post("", authenticate, transactionController.createTransaction);

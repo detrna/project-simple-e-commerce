@@ -1,6 +1,7 @@
 import { Order } from "../../database/src/generated/prisma/client";
 import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
+import { redis } from "../../shared/redisHelper";
 import { IOrderRepository } from "../order/Iorder.repository";
 import { ITransactionRepository } from "./Itransaction.repository";
 import { Transaction } from "./Transaction";
@@ -36,6 +37,8 @@ export class TransactionService {
     if (result?.order[0].userId !== data.userId) {
       throw new UnauthorizedError("This user didn't own this transaction");
     }
+
+    redis.set({ entityName: "trx", key: result.id, value: result });
 
     return result;
   };

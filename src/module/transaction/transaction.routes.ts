@@ -8,8 +8,11 @@ import {
   GetMyTransactionsSchema,
   GetTransactionByIdSchema,
 } from "./transaction.schema";
+import { getCache } from "../../middleware/getCache";
 
 const router = Router();
+
+const entityName = "trx";
 
 router.get(
   "",
@@ -22,6 +25,7 @@ router.get(
   "/:id",
   authenticate,
   validate(GetTransactionByIdSchema),
+  getCache({ entityName, paramsKey: "id" }),
   transactionController.getTransactionById,
 );
 router.post(

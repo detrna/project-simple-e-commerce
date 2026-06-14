@@ -8,7 +8,11 @@ export class TransactionController {
     this.service = service;
   }
 
-  getMyTransactions = async (req: Request, res: Response) => {
+  getMyTransactions = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
       const userId: string = req.user?.userId as string;
       const pagination: pagination = req.pagination!;
@@ -26,7 +30,7 @@ export class TransactionController {
 
       return responseHelper(res, payload);
     } catch (e) {
-      return res.json(e);
+      next(e);
     }
   };
 
