@@ -8,10 +8,10 @@ export const PaginationSchema = z.object({
   cursor: string().nullable().default(null),
 });
 
-export interface pagination {
+export type pagination = {
   limit: number;
   cursor: string | null;
-}
+};
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
   let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;
