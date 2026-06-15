@@ -1,6 +1,6 @@
 import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
-import { redis } from "../../shared/redisHelper";
+import { redis } from "../../shared/RedisHelper";
 import { Store } from "../store/Store";
 import { StoreRepository } from "../store/store.repository";
 import { Variant } from "../variant/Variant";

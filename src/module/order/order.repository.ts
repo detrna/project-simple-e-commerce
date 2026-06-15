@@ -20,7 +20,6 @@ export class OrderRepository implements IOrderRepository {
 
       return rows;
     } catch (e) {
-      console.log(e);
       throw e;
     }
   }

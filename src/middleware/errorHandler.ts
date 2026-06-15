@@ -1,11 +1,18 @@
 import { AppError } from "../shared/AppError";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-export function errorHandler(error: AppError) {
-  return (req: Request, res: Response) => {
-    console.error(error);
+export function errorHandler(
+  err: AppError | Error,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  console.error(err);
+  if (err instanceof AppError) {
     return res
-      .status(error.statusCode)
-      .json({ message: `Error: ${error.message}` });
-  };
+      .status(err.statusCode)
+      .json({ message: `Error: ${err.message}` });
+  } else if (err instanceof Error) {
+    return res.status(500).json({ message: `Error: ${err.message}` });
+  }
 }

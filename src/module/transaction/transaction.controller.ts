@@ -53,7 +53,7 @@ export class TransactionController {
         message: "Transaction fetched successfully",
       });
     } catch (e) {
-      next(e);
+      throw e;
     }
   };
 

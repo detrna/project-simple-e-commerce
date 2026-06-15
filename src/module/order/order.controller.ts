@@ -9,7 +9,7 @@ export class OrderController {
     this.orderService = orderService;
   }
 
-  getMyOrders = async (req: Request, res: Response) => {
+  getMyOrders = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId: string = req.user?.userId as string;
       const pagination: pagination = req.pagination!;
@@ -27,15 +27,11 @@ export class OrderController {
 
       return responseHelper(res, payload);
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-        return res.json(e);
-      }
-      console.error(e);
+      next(e);
     }
   };
 
-  createOrder = async (req: Request, res: Response) => {
+  createOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const quantity: number = req.body.quantity;
       const userId: string = req.user?.userId as string;
@@ -50,10 +46,7 @@ export class OrderController {
         message: "Order created successfully",
       });
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e);
-        res.json(e);
-      }
+      next(e);
     }
   };
 

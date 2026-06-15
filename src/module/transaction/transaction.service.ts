@@ -1,7 +1,7 @@
 import { Order } from "../../database/src/generated/prisma/client";
 import { pagination } from "../../middleware/pagination";
 import { BadRequestError, UnauthorizedError } from "../../shared/AppError";
-import { redis } from "../../shared/redisHelper";
+import { redis } from "../../shared/RedisHelper";
 import { IOrderRepository } from "../order/Iorder.repository";
 import { ITransactionRepository } from "./Itransaction.repository";
 import { Transaction } from "./Transaction";
