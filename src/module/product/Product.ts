@@ -1,18 +1,10 @@
-export class Product {
-  constructor(
-    public id: string,
-    public name: string,
-    public category: Category,
-    public subCategory: Subcategory,
-    public createdAt: Date,
-  ) {
-    this.id = id;
-    this.name = name;
-    this.category = category;
-    this.subCategory = subCategory;
-    this.createdAt = createdAt;
-  }
-}
+export type Product = {
+  id: string;
+  name: string;
+  category: Category;
+  subcategory: Subcategory;
+  createdAt: Date;
+};
 
 export type CreateProductDTO = {
   name: string;

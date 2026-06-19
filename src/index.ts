@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
-import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import userRoutes from "./module/user/user.routes";
 import authRoutes from "./module/auth/auth.routes";
@@ -13,9 +13,11 @@ import transactionRoutes from "./module/transaction/transaction.routes";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
@@ -26,19 +28,8 @@ app.use("/api/v1/transactions", transactionRoutes);
 
 app.use(errorHandler);
 
-app.get("/api/v1/token", (req, res) => {
-  const header = req.headers.authorization;
-  const token = header!.split(" ")[1];
+app.listen(port);
 
-  if (!token) {
-    res.send({ msg: "No cookie provided" });
-  }
-
-  const key: string = process.env.ACCESS_JWT_SECRET!;
-  const payload = jwt.verify(token, key);
-  res.send(payload);
-});
-
-app.listen(3000);
+console.log(`http://localhost:${port}`);
 
 export default app;

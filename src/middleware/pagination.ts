@@ -11,16 +11,19 @@ export const PaginationSchema = z.object({
 export type pagination = {
   limit: number;
   cursor: string | null;
+  hasMore: boolean;
 };
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
   let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;
-  const cursor: string | null = req.validatedQuery?.cursor?.toString() ?? null;
+  let cursor: string | null = req.validatedQuery?.cursor?.toString() ?? null;
+
+  if (cursor === "null" || cursor === "") cursor = null;
 
   if (limit > 50) limit = defaultLimit;
   if (limit <= 0) limit = defaultLimit;
 
-  const pagination: pagination = { limit, cursor };
+  const pagination: pagination = { limit, cursor, hasMore: false };
 
   req.pagination = pagination;
 

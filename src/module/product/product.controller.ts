@@ -1,25 +1,51 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ProductService } from "./product.service";
 import { CreateProductDTO } from "./Product";
 import { StoreService } from "../store/store.service";
+import { pagination } from "../../middleware/pagination";
+import { responseHelper, responseHelperDTO } from "../../shared/responseHelper";
 
 export class ProductController {
-  async getAllProducts(req: Request, res: Response): Promise<Response> {
+  constructor(private service: ProductService) {
+    this.service = service;
+  }
+
+  getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const service = new ProductService();
+      const pagination: pagination = req.pagination!;
+
+      const result = await this.service.getAllProducts(pagination);
+
+      const payload: responseHelperDTO = {
+        result,
+        message: "Products fetched successfully",
+        pagination,
+      };
+
+      return responseHelper(res, payload);
+    } catch (e) {
+      next(e);
+    }
+  };
+
+  getProductsByStoreId = async (
+    req: Request,
+    res: Response,
+  ): Promise<Response> => {
+    try {
       const storeId = req.query.id;
 
       if (typeof storeId !== "string") {
         return res.status(400).json({ message: "Invalid id" });
       }
-      const result = await service.getAllProducts(storeId);
+      const result = await this.service.getProductsByStoreId(storeId);
       return res.json(result);
     } catch (e) {
       console.log(e);
       return res.json(e);
     }
-  }
-  async createProduct(req: Request, res: Response): Promise<Response> {
+  };
+  createProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
       const storeService = new StoreService();
       const existingStore = await storeService.getByUid(req.body.storeId);
@@ -34,22 +60,18 @@ export class ProductController {
           .json({ message: "Unauthorized to create product for this store" });
       }
 
-      const service = new ProductService();
       const productData: CreateProductDTO = req.body;
-      const result = await service.createProduct(productData);
+      const result = await this.service.createProduct(productData);
       return res.json(result);
     } catch (e) {
-      return res
-        .status(400)
-        .json({
-          message: e instanceof Error ? e.message : "An error occurred",
-        });
+      return res.status(400).json({
+        message: e instanceof Error ? e.message : "An error occurred",
+      });
     }
-  }
-  async getProduct(req: Request, res: Response): Promise<Response> {
+  };
+  getProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const service = new ProductService();
-      const result = await service.getProducts(req.params.id as string);
+      const result = await this.service.getProducts(req.params.id as string);
       return res.json(result);
     } catch (e) {
       if (e instanceof Error) {
@@ -57,11 +79,10 @@ export class ProductController {
       }
       return res.json(e);
     }
-  }
-  async deleteProduct(req: Request, res: Response): Promise<Response> {
+  };
+  deleteProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const service = new ProductService();
-      const result = await service.deleteProduct(req.params.id as string);
+      const result = await this.service.deleteProduct(req.params.id as string);
       return res.json(result);
     } catch (e) {
       if (e instanceof Error) {
@@ -70,5 +91,5 @@ export class ProductController {
       }
       return res.json(e);
     }
-  }
+  };
 }

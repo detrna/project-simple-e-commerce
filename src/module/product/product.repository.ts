@@ -1,14 +1,34 @@
+import { pagination } from "../../middleware/pagination";
 import { prisma } from "../../shared/prismaHelper";
 import { IProductRepository } from "./Iproduct.repository";
 import { CreateProductDTO, Product } from "./Product";
-import { ProductMapper } from "./product.mapper";
 
 export class ProductRepository implements IProductRepository {
+  async getAllProducts(pagination: pagination): Promise<Product[]> {
+    try {
+      const { limit, cursor } = pagination;
+      const rows = await prisma.product.findMany({
+        include: { store: true, variants: true },
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+        skip: cursor ? 1 : 0,
+        take: limit,
+        cursor: cursor ? { id: cursor } : undefined,
+      });
+
+      return rows;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async getAllProductsByStoreId(id: string): Promise<Product[]> {
     try {
-      const rows = await prisma.product.findMany({ where: { storeId: id } });
-      const products = rows.map((rows) => ProductMapper.toDomain(rows));
-      return products;
+      const rows = await prisma.product.findMany({
+        where: { storeId: id },
+        include: { store: true },
+      });
+
+      return rows;
     } catch (e) {
       console.log(e);
       throw new Error("Failed to fetch products");
@@ -25,18 +45,17 @@ export class ProductRepository implements IProductRepository {
         },
       });
 
-      const product = ProductMapper.toDomain(result);
-      return product;
+      return result;
     } catch (e) {
       console.log(e);
       throw new Error("Failed to create product");
     }
   }
-  async getProductById(id: string): Promise<Product> {
+  async getProductById(id: string): Promise<Product | null> {
     try {
       const rows = await prisma.product.findUnique({ where: { id: id } });
-      const product = ProductMapper.toDomain(rows);
-      return product;
+
+      return rows;
     } catch (e) {
       console.log(e);
       throw new Error("Failed to fetch product");
@@ -59,8 +78,8 @@ export class ProductRepository implements IProductRepository {
       const rows = await prisma.product.findFirst({
         where: { id: productId, store: { userId: ownerId } },
       });
-      console.log("ROWS:", rows);
-      return ProductMapper.toDomain(rows);
+
+      return rows;
     } catch (e) {
       console.error(e);
       throw new Error("Failed to fetch product by owner id");

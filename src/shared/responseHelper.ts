@@ -14,7 +14,8 @@ export function responseHelper(res: Response, data: responseHelperDTO) {
 
     payload.meta.pagination = {
       limit,
-      cursor: data.result[limit - 1].id,
+      cursor: data.result[data.result.length - 1].id,
+      hasMore: data.result.length === limit ? true : false,
     };
   }
 
