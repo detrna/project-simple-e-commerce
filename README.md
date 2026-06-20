@@ -1,3 +1,11 @@
+# API Documentation:
+
+https://bqilklryvy.apidog.io
+
+Finished Routes:
+Order (except GET Orders By Store Id)
+Transaction
+
 # Setup Guide
 
 This project includes complete Docker and Docker Compose configurations for both production and development environments.
