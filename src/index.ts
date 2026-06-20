@@ -10,6 +10,7 @@ import variantRoutes from "./module/variant/variant.routes";
 import storeRoutes from "./module/store/store.routes";
 import orderRoutes from "./module/order/order.routes";
 import transactionRoutes from "./module/transaction/transaction.routes";
+import categoryRoutes from "./module/category/category.routes";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/variants", variantRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/transactions", transactionRoutes);
+app.use("/api/v1/categories", categoryRoutes);
 
 app.use(errorHandler);
 

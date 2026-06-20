@@ -8,7 +8,7 @@ export class ProductRepository implements IProductRepository {
     try {
       const { limit, cursor } = pagination;
       const rows = await prisma.product.findMany({
-        include: { store: true, variants: true },
+        include: { store: true, variants: true, subcategory: true },
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
         skip: cursor ? 1 : 0,
         take: limit,
@@ -25,7 +25,7 @@ export class ProductRepository implements IProductRepository {
     try {
       const rows = await prisma.product.findMany({
         where: { storeId: id },
-        include: { store: true },
+        include: { store: true, variants: true, category: true },
       });
 
       return rows;
@@ -39,8 +39,7 @@ export class ProductRepository implements IProductRepository {
       const result = await prisma.product.create({
         data: {
           name: data.name,
-          category: data.category,
-          subcategory: data.subcategory,
+          subcategoryId: data.subcategoryId,
           storeId: data.storeId,
         },
       });

@@ -9,30 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const Category = {
-  ELECTRONICS: 'ELECTRONICS',
-  BOOKS: 'BOOKS',
-  FASHION: 'FASHION'
-} as const
-
-export type Category = (typeof Category)[keyof typeof Category]
-
-
-export const Subcategory = {
-  PHONE: 'PHONE',
-  LAPTOP: 'LAPTOP',
-  TV: 'TV',
-  NOVEL: 'NOVEL',
-  PSYCHOLOGY: 'PSYCHOLOGY',
-  HEALTH: 'HEALTH',
-  SHIRT: 'SHIRT',
-  JACKET: 'JACKET',
-  TROUSER: 'TROUSER'
-} as const
-
-export type Subcategory = (typeof Subcategory)[keyof typeof Subcategory]
-
-
 export const Shipment = {
   WAITING_OWNER: 'WAITING_OWNER',
   WAITING_COURIER: 'WAITING_COURIER',

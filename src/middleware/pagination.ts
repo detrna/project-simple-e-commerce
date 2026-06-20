@@ -11,7 +11,7 @@ export const PaginationSchema = z.object({
 export type pagination = {
   limit: number;
   cursor: string | null;
-  hasMore: boolean;
+  hasMore?: boolean;
 };
 
 export function paginate(req: Request, _: Response, next: NextFunction) {

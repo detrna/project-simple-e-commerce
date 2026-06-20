@@ -67,3 +67,13 @@ export type Transaction = Prisma.TransactionModel
  * 
  */
 export type Review = Prisma.ReviewModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Subcategory
+ * 
+ */
+export type Subcategory = Prisma.SubcategoryModel

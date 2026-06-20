@@ -1,7 +1,8 @@
+import { pagination } from "../../middleware/pagination";
 import { Product } from "./Product";
 
 export interface IProductRepository {
-  getAllProducts(): Promise<Product[]>;
+  getAllProducts(pagination: pagination): Promise<Product[]>;
   getAllProductsByStoreId(id: any): Promise<Product[]>;
   createProduct(data: any): Promise<Product>;
   getProductById(id: any): Promise<Product | null>;

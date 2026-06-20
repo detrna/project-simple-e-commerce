@@ -45,6 +45,7 @@ export class ProductController {
       return res.json(e);
     }
   };
+
   createProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
       const storeService = new StoreService();
@@ -69,6 +70,7 @@ export class ProductController {
       });
     }
   };
+
   getProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
       const result = await this.service.getProducts(req.params.id as string);
@@ -80,6 +82,7 @@ export class ProductController {
       return res.json(e);
     }
   };
+
   deleteProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
       const result = await this.service.deleteProduct(req.params.id as string);

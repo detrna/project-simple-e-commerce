@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { redis } from "../shared/redisHelper";
+import { redis } from "../shared/RedisHelper";
 import { responseHelper, responseHelperDTO } from "../shared/responseHelper";
 
 export function getCache(data: { entityName: string; paramsKey: string }) {

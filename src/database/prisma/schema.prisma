@@ -49,31 +49,13 @@ model Product {
   name String
   storeId String
 
-  category Category
-  subcategory Subcategory
+  subcategoryId String
+  subcategory Subcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
 
   variants Variant[]
   
   store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-}
-
-enum Category {
-  ELECTRONICS
-  BOOKS
-  FASHION
-}
-
-enum Subcategory {
-  PHONE
-  LAPTOP
-  TV
-  NOVEL
-  PSYCHOLOGY
-  HEALTH
-  SHIRT
-  JACKET
-  TROUSER
 }
 
 model Variant {
@@ -151,4 +133,25 @@ model Review {
   
   orderId String
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String
+
+  subcategory Subcategory[]
+
+  @@index([name])
+}
+
+model Subcategory {
+   id String @id @default(uuid())
+  name String
+
+  product Product[]
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([name])
+  @@index([categoryId])
 }

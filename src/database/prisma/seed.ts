@@ -18,6 +18,16 @@ async function main() {
     skipDuplicates: true,
   });
 
+  await prisma.category.createMany({
+    data: data.categories,
+    skipDuplicates: true,
+  });
+
+  await prisma.subcategory.createMany({
+    data: data.subcategories,
+    skipDuplicates: true,
+  });
+
   await prisma.product.createMany({
     data: data.products,
     skipDuplicates: true,
