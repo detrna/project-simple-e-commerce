@@ -49,8 +49,8 @@ model Product {
   name String
   storeId String
 
-  subcategoryId String
-  subcategory Subcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  subcategoryName String
+  subcategory Subcategory @relation(fields: [subcategoryName], references: [name], onDelete: Cascade)
 
   variants Variant[]
   
@@ -136,8 +136,7 @@ model Review {
 }
 
 model Category {
-  id String @id @default(uuid())
-  name String
+  name String @id
 
   subcategory Subcategory[]
 
@@ -145,13 +144,12 @@ model Category {
 }
 
 model Subcategory {
-   id String @id @default(uuid())
-  name String
+  name String @id
 
   product Product[]
-  categoryId String
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryName String
+  category Category @relation(fields: [categoryName], references: [name], onDelete: Cascade)
 
   @@index([name])
-  @@index([categoryId])
+  @@index([categoryName])
 }

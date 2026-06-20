@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ProductService } from "./product.service";
-import { CreateProductDTO } from "./Product";
+import { CreateProductDTO, GetAllProductsQuery } from "./Product";
 import { StoreService } from "../store/store.service";
 import { pagination } from "../../middleware/pagination";
 import { responseHelper, responseHelperDTO } from "../../shared/responseHelper";
@@ -13,8 +13,9 @@ export class ProductController {
   getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pagination: pagination = req.pagination!;
+      const query: GetAllProductsQuery = req.query;
 
-      const result = await this.service.getAllProducts(pagination);
+      const result = await this.service.getAllProducts({ pagination, query });
 
       const payload: responseHelperDTO = {
         result,

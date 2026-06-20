@@ -1,12 +1,15 @@
 import { pagination } from "../../middleware/pagination";
 import { IProductRepository } from "./Iproduct.repository";
-import { CreateProductDTO, Product } from "./Product";
+import { CreateProductDTO, GetAllProductsQuery, Product } from "./Product";
 export class ProductService {
   constructor(private repo: IProductRepository) {
     this.repo = repo;
   }
-  async getAllProducts(pagination: pagination): Promise<Product[]> {
-    const result = await this.repo.getAllProducts(pagination);
+  async getAllProducts(data: {
+    pagination: pagination;
+    query: GetAllProductsQuery;
+  }): Promise<Product[]> {
+    const result = await this.repo.getAllProducts(data);
     return result;
   }
 

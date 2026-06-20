@@ -117,7 +117,7 @@ export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
   storeId: 'storeId',
-  subcategoryId: 'subcategoryId',
+  subcategoryName: 'subcategoryName',
   createdAt: 'createdAt'
 } as const
 
@@ -188,7 +188,6 @@ export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof 
 
 
 export const CategoryScalarFieldEnum = {
-  id: 'id',
   name: 'name'
 } as const
 
@@ -196,9 +195,8 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 
 
 export const SubcategoryScalarFieldEnum = {
-  id: 'id',
   name: 'name',
-  categoryId: 'categoryId'
+  categoryName: 'categoryName'
 } as const
 
 export type SubcategoryScalarFieldEnum = (typeof SubcategoryScalarFieldEnum)[keyof typeof SubcategoryScalarFieldEnum]

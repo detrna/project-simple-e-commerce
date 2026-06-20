@@ -14,7 +14,7 @@ export function responseHelper(res: Response, data: responseHelperDTO) {
 
     payload.meta.pagination = {
       limit,
-      cursor: data.result[data.result.length - 1].id,
+      cursor: data.result[data.result.length - 1].id!,
       hasMore: data.result.length === limit ? true : false,
     };
   }
@@ -34,5 +34,5 @@ interface responseSchema {
 }
 
 interface entity {
-  id: string;
+  id?: string;
 }

@@ -1,18 +1,30 @@
 import { pagination } from "../../middleware/pagination";
 import { prisma } from "../../shared/prismaHelper";
 import { IProductRepository } from "./Iproduct.repository";
-import { CreateProductDTO, Product } from "./Product";
+import { CreateProductDTO, GetAllProductsQuery, Product } from "./Product";
 
 export class ProductRepository implements IProductRepository {
-  async getAllProducts(pagination: pagination): Promise<Product[]> {
+  async getAllProducts(data: {
+    pagination: pagination;
+    query: GetAllProductsQuery;
+  }): Promise<Product[]> {
     try {
-      const { limit, cursor } = pagination;
+      const query: GetAllProductsQuery = data.query;
+      const { limit, cursor } = data.pagination;
       const rows = await prisma.product.findMany({
         include: { store: true, variants: true, subcategory: true },
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
         skip: cursor ? 1 : 0,
         take: limit,
         cursor: cursor ? { id: cursor } : undefined,
+        where: {
+          variants: {
+            some: { price: { gte: query.minPrice, lte: query.maxPrice } },
+          },
+          subcategory: { categoryName: query.category },
+          subcategoryName: query.subcategory,
+          store: { address: query.location },
+        },
       });
 
       return rows;
@@ -25,7 +37,7 @@ export class ProductRepository implements IProductRepository {
     try {
       const rows = await prisma.product.findMany({
         where: { storeId: id },
-        include: { store: true, variants: true, category: true },
+        include: { store: true, variants: true, subcategory: true },
       });
 
       return rows;
@@ -39,7 +51,7 @@ export class ProductRepository implements IProductRepository {
       const result = await prisma.product.create({
         data: {
           name: data.name,
-          subcategoryId: data.subcategoryId,
+          subcategoryName: data.subcategory,
           storeId: data.storeId,
         },
       });

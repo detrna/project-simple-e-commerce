@@ -11,10 +11,7 @@ export class CategoryController {
     try {
       const result = await this.service.getCategories();
 
-      return responseHelper(res, {
-        result,
-        message: "Categories Fetched Successfully",
-      });
+      res.json({ data: result });
     } catch (e) {
       next(e);
     }
