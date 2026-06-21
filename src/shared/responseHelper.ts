@@ -9,7 +9,11 @@ export function responseHelper(res: Response, data: responseHelperDTO) {
     },
   };
 
-  if (data.pagination && Array.isArray(data.result)) {
+  if (
+    data.pagination &&
+    Array.isArray(data.result) &&
+    data.result.length !== 0
+  ) {
     const limit = data.pagination.limit;
 
     payload.meta.pagination = {

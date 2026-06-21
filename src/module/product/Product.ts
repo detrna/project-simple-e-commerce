@@ -1,5 +1,7 @@
+import z from "zod";
 import { Subcategory } from "../category/Category";
 import { Variant } from "../variant/Variant";
+import { GetAllProductsQuery } from "./product.schema";
 
 export type Product = {
   id: string;
@@ -15,10 +17,4 @@ export type CreateProductDTO = {
   storeId: string;
 };
 
-export type GetAllProductsQuery = {
-  category?: string;
-  subcategory?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  location?: string;
-};
+export type GetAllProductsQuery = z.infer<typeof GetAllProductsQuery>;

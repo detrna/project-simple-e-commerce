@@ -19,11 +19,11 @@ export class ProductRepository implements IProductRepository {
         cursor: cursor ? { id: cursor } : undefined,
         where: {
           variants: {
-            some: { price: { gte: query.minPrice, lte: query.maxPrice } },
+            some: { price: { gte: query.priceMin, lte: query.priceMax } },
           },
           subcategory: { categoryName: query.category },
           subcategoryName: query.subcategory,
-          store: { address: query.location },
+          store: { address: { in: query.locations } },
         },
       });
 

@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { z } from "zod";
+import { PaginationSchema } from "./pagination";
+import { GetAllProductsQuery } from "../module/product/product.schema";
 
 export function validate<T extends RequestSchema>(schema: z.ZodType<T>) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -13,8 +15,9 @@ export function validate<T extends RequestSchema>(schema: z.ZodType<T>) {
       const result = schema.safeParse(request);
 
       if (!result.success) {
+        console.log(result.error.flatten());
         return res.status(400).json({
-          inputError: result.error.flatten,
+          inputError: result.error.flatten(),
         });
       }
 
@@ -27,6 +30,9 @@ export function validate<T extends RequestSchema>(schema: z.ZodType<T>) {
       next();
     } catch (e) {
       console.log(e);
+      return res.status(500).json({
+        inputError: e,
+      });
     }
   };
 }
@@ -38,7 +44,5 @@ interface RequestSchema {
   user?: any;
 }
 
-export interface ValidatedQuery {
-  limit?: string;
-  cursor?: string;
-}
+const CombinedUnion = z.intersection(PaginationSchema, GetAllProductsQuery);
+export type ValidatedQuery = z.infer<typeof CombinedUnion>;

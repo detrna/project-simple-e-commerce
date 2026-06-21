@@ -151,3 +151,8 @@ describe("getOrderById", () => {
     expect(result.status).toBe(400);
   });
 });
+
+// Describe, nama test
+// it, logicnya, apa guna testnya
+// persiapan, integrasi, verifikasi
+// expect, bandingin response sama data yang dimau

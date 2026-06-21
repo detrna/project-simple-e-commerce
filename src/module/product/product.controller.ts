@@ -13,7 +13,7 @@ export class ProductController {
   getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const pagination: pagination = req.pagination!;
-      const query: GetAllProductsQuery = req.query;
+      const query: GetAllProductsQuery = req.validatedQuery!;
 
       const result = await this.service.getAllProducts({ pagination, query });
 
