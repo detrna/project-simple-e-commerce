@@ -11,4 +11,5 @@ export interface IProductRepository {
   getProductById(id: any): Promise<Product | null>;
   deleteProduct(id: any): Promise<boolean>;
   getByOwnerId(productId: string, ownerId: string): Promise<Product | null>;
+  getSearchRecomendations(search: string): Promise<Product[]>;
 }

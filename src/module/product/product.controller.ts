@@ -32,22 +32,23 @@ export class ProductController {
   getProductsByStoreId = async (
     req: Request,
     res: Response,
-  ): Promise<Response> => {
+    next: NextFunction,
+  ) => {
     try {
       const storeId = req.query.id;
 
-      if (typeof storeId !== "string") {
+      if (typeof storeId !== "string")
         return res.status(400).json({ message: "Invalid id" });
-      }
+
       const result = await this.service.getProductsByStoreId(storeId);
+
       return res.json(result);
     } catch (e) {
-      console.log(e);
-      return res.json(e);
+      next(e);
     }
   };
 
-  createProduct = async (req: Request, res: Response): Promise<Response> => {
+  createProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const storeService = new StoreService();
       const existingStore = await storeService.getByUid(req.body.storeId);
@@ -66,34 +67,43 @@ export class ProductController {
       const result = await this.service.createProduct(productData);
       return res.json(result);
     } catch (e) {
-      return res.status(400).json({
-        message: e instanceof Error ? e.message : "An error occurred",
-      });
+      next(e);
     }
   };
 
-  getProduct = async (req: Request, res: Response): Promise<Response> => {
+  getProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.service.getProducts(req.params.id as string);
+
       return res.json(result);
     } catch (e) {
-      if (e instanceof Error) {
-        return res.status(400).json({ message: e.message });
-      }
-      return res.json(e);
+      next(e);
     }
   };
 
-  deleteProduct = async (req: Request, res: Response): Promise<Response> => {
+  deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.service.deleteProduct(req.params.id as string);
+
       return res.json(result);
     } catch (e) {
-      if (e instanceof Error) {
-        console.log("controller:", e);
-        return res.status(400).json(e.message);
-      }
-      return res.json(e);
+      next(e);
+    }
+  };
+
+  getSearchRecomendations = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const search = req.params.search as string;
+
+      const result = await this.service.getSearchRecomendations(search);
+
+      return responseHelper(res, { result });
+    } catch (e) {
+      next(e);
     }
   };
 }

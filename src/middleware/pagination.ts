@@ -15,8 +15,8 @@ export type pagination = {
 };
 
 export function paginate(req: Request, _: Response, next: NextFunction) {
-  let limit: number = Number(req.validatedQuery?.limit) || defaultLimit;
-  let cursor: string | null = req.validatedQuery?.cursor?.toString() ?? null;
+  let limit: number = Number(req.query?.limit) || defaultLimit;
+  let cursor: string | null = req.query?.cursor?.toString() ?? null;
 
   if (cursor === "null" || cursor === "") cursor = null;
 

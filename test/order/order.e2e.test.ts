@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, describe, expect, it } from "vitest";
 import supertest from "supertest";
 import app from "../../src/index";
 import "dotenv/config";
@@ -151,8 +151,3 @@ describe("getOrderById", () => {
     expect(result.status).toBe(400);
   });
 });
-
-// Describe, nama test
-// it, logicnya, apa guna testnya
-// persiapan, integrasi, verifikasi
-// expect, bandingin response sama data yang dimau

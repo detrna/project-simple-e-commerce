@@ -24,6 +24,9 @@ export class ProductRepository implements IProductRepository {
           subcategory: { categoryName: query.category },
           subcategoryName: query.subcategory,
           store: { address: { in: query.locations } },
+          name: query.search
+            ? { contains: query.search, mode: "insensitive" }
+            : undefined,
         },
       });
 
@@ -42,10 +45,10 @@ export class ProductRepository implements IProductRepository {
 
       return rows;
     } catch (e) {
-      console.log(e);
-      throw new Error("Failed to fetch products");
+      throw e;
     }
   }
+
   async createProduct(data: CreateProductDTO): Promise<Product> {
     try {
       const result = await prisma.product.create({
@@ -58,29 +61,29 @@ export class ProductRepository implements IProductRepository {
 
       return result;
     } catch (e) {
-      console.log(e);
-      throw new Error("Failed to create product");
+      throw e;
     }
   }
+
   async getProductById(id: string): Promise<Product | null> {
     try {
       const rows = await prisma.product.findUnique({ where: { id: id } });
 
       return rows;
     } catch (e) {
-      console.log(e);
-      throw new Error("Failed to fetch product");
+      throw e;
     }
   }
+
   async deleteProduct(id: string): Promise<boolean> {
     try {
       const result = await prisma.product.delete({ where: { id: id } });
       return true;
     } catch (e) {
-      console.log(e);
-      throw new Error("Failed to delete product");
+      throw e;
     }
   }
+
   async getByOwnerId(
     productId: string,
     ownerId: string,
@@ -92,8 +95,23 @@ export class ProductRepository implements IProductRepository {
 
       return rows;
     } catch (e) {
-      console.error(e);
-      throw new Error("Failed to fetch product by owner id");
+      throw e;
+    }
+  }
+
+  async getSearchRecomendations(search: string): Promise<Product[]> {
+    try {
+      console.log(search);
+
+      const rows = await prisma.product.findMany({
+        where: { name: { startsWith: search, mode: "insensitive" } },
+        take: 5,
+        orderBy: { name: "asc" },
+      });
+
+      return rows;
+    } catch (e) {
+      throw e;
     }
   }
 }

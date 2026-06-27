@@ -3,7 +3,7 @@ import { authenticate } from "../../middleware/authenticate";
 import { VariantController } from "../variant/variant.controller";
 import { paginate } from "../../middleware/pagination";
 import { validate } from "../../middleware/inputValidation";
-import { GetAllProductsSchema } from "./product.schema";
+import { GetAllProductsSchema, GetSearchRecomendation } from "./product.schema";
 import { productController } from "./product.container";
 
 const router = Router();
@@ -20,5 +20,10 @@ router.post("", authenticate, productController.createProduct);
 router.get("/:id", productController.getProduct);
 router.post("/:productId/variants", authenticate, variantController.create);
 router.get("/:productId/variants", variantController.getByProductId);
+router.get(
+  "/search/:search",
+  validate(GetSearchRecomendation),
+  productController.getSearchRecomendations,
+);
 
 export default router;
