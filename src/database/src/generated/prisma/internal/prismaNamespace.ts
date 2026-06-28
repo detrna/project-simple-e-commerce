@@ -1378,6 +1378,8 @@ export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
   storeId: 'storeId',
+  priceMin: 'priceMin',
+  sold: 'sold',
   subcategoryName: 'subcategoryName',
   createdAt: 'createdAt'
 } as const
@@ -1390,6 +1392,7 @@ export const VariantScalarFieldEnum = {
   name: 'name',
   price: 'price',
   stock: 'stock',
+  sold: 'sold',
   productId: 'productId'
 } as const
 

@@ -12,21 +12,30 @@ export class ProductRepository implements IProductRepository {
       const query: GetAllProductsQuery = data.query;
       const { limit, cursor } = data.pagination;
       const rows = await prisma.product.findMany({
-        include: { store: true, variants: true, subcategory: true },
-        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+        include: {
+          store: true,
+          variants: { orderBy: { id: "asc" } },
+          subcategory: true,
+        },
+        orderBy: [
+          { createdAt: "desc" },
+          { id: "desc" },
+          { priceMin: query.price ? query.price : undefined },
+          { sold: query.sold ? query.sold : undefined },
+        ],
         skip: cursor ? 1 : 0,
         take: limit,
         cursor: cursor ? { id: cursor } : undefined,
         where: {
-          variants: {
-            some: { price: { gte: query.priceMin, lte: query.priceMax } },
-          },
           subcategory: { categoryName: query.category },
           subcategoryName: query.subcategory,
           store: { address: { in: query.locations } },
           name: query.search
             ? { contains: query.search, mode: "insensitive" }
-            : undefined,
+            : { contains: "" },
+          variants: {
+            some: { price: { gte: query.priceMin, lte: query.priceMax } },
+          },
         },
       });
 

@@ -50,8 +50,8 @@ export class ProductService {
     return result;
   }
 
-  async getSearchRecomendations(search: string) {
-    const result = await this.repo.getSearchRecomendations(search);
+  async getSearchRecomendations(search: string): Promise<Product[]> {
+    const result: Product[] = await this.repo.getSearchRecomendations(search);
 
     return result;
   }

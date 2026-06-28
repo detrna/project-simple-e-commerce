@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "priceMin" DROP NOT NULL,
+ALTER COLUMN "sold" SET DEFAULT 0;

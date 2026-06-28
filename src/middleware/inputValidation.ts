@@ -40,3 +40,5 @@ interface RequestSchema {
   query?: any;
   params?: any;
 }
+
+export const OrderBySchema = z.enum(["asc", "desc"]).optional();
